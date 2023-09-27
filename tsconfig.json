@@ -2,13 +2,19 @@
   "extends": "expo/tsconfig.base",
   "compilerOptions": {
     "strict": true,
+    "types": [
+      "nativewind/types"
+    ],
     "baseUrl": "./",
     "paths": {
       "@screens/*": [
         "./src/screens/*"
       ],
       "@components/*": [
-        "./scr/components/*"
+        "./src/components/*"
+      ],
+      "@routes/*": [
+        "./src/routes/*"
       ]
     }
   }
