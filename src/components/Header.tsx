@@ -11,10 +11,10 @@ export function Header() {
         className="rounded-full"
       />
       <View className="flex-row gap-3">
-        <TouchableHighlight className="w-11 h-11 bg-gray-200 items-center justify-center rounded-lg">
+        <TouchableHighlight className="w-12 h-12 bg-gray-200 items-center justify-center rounded-lg">
           <Feather name="shopping-cart" size={18} color="#737380" />
         </TouchableHighlight>
-        <TouchableHighlight className="w-11 h-11 bg-gray-200 items-center justify-center rounded-lg">
+        <TouchableHighlight className="w-12 h-12 bg-gray-200 items-center justify-center rounded-lg">
           <Feather name="bell" size={18} color="#737380" />
         </TouchableHighlight>
       </View>
