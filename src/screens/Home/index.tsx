@@ -1,10 +1,11 @@
-import { Text, View, TextInput, ScrollView, FlatList } from "react-native";
+import { Text, View, TextInput, Image, FlatList } from "react-native";
 import { SafeAreaView } from "react-native-safe-area-context";
 import Feather from "@expo/vector-icons/Feather";
 
 import { Header } from "@components/Header";
+import PromotionImage from "@assets/promotion.png";
 
-const promos = [1, 2, 3, 4, 5];
+const promos = [1, 2];
 
 export function Home() {
   return (
@@ -49,15 +50,22 @@ export function Home() {
       </View>
 
       <FlatList
-        className="bg-slate-600 max-h-40 w-full"
+        className="max-h-40 mt-8"
         data={promos}
         keyExtractor={(item) => item.toString()}
-        renderItem={(item) => (
-          <View className="bg-gray-200 rounded-md h-40 w-1/5">
-            <Text>{item.item}</Text>
+        renderItem={() => (
+          <View className="bg-gray-400 rounded-md h-40 w-72 overflow-hidden">
+            <Image
+              source={PromotionImage}
+              resizeMode="cover"
+              className="w-full h-full"
+            />
           </View>
         )}
+        contentContainerStyle={{ paddingHorizontal: 24 }}
+        ItemSeparatorComponent={() => <View className="mr-2 ml-2" />}
         horizontal
+        showsHorizontalScrollIndicator={false}
       />
     </SafeAreaView>
   );
