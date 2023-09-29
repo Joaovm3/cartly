@@ -25,7 +25,7 @@ const mainCategories = [
 
 export function Home() {
   return (
-    <SafeAreaView className="h-screen bg-gray-100">
+    <SafeAreaView className="flex-1 bg-gray-100">
       <ScrollView>
         <View className="pt-4">
           <Header />
