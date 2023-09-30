@@ -13,6 +13,7 @@ import Feather from "@expo/vector-icons/Feather";
 
 import { Header } from "@components/Header";
 import PromotionImage from "@assets/promotion.png";
+import { SectionHeader } from "@components/SectionHeader";
 
 const promos = [1, 2];
 const mainCategories = [
@@ -88,15 +89,7 @@ export function Home() {
         />
 
         <View className="mt-8">
-          <View className="flex-row justify-between px-6">
-            <Text className="text-base font-medium leading-relaxed text-gray-800">
-              Categorias principais
-            </Text>
-            <Pressable className="flex-row items-center space-x-1">
-              <Text className="text-gray-600">Ver mais</Text>
-              <Feather name="arrow-right" size={20} color="#737380" />
-            </Pressable>
-          </View>
+          <SectionHeader title="Categorias principais" />
 
           <FlatList
             data={mainCategories}
@@ -117,15 +110,7 @@ export function Home() {
         </View>
 
         <View className="mt-8">
-          <View className="flex-row justify-between px-6">
-            <Text className="text-base font-medium leading-relaxed text-gray-800">
-              Mercados nas proximidades
-            </Text>
-            <Pressable className="flex-row items-center space-x-1">
-              <Text className="text-gray-600">Ver mais</Text>
-              <Feather name="arrow-right" size={20} color="#737380" />
-            </Pressable>
-          </View>
+          <SectionHeader title="Mercados nas proximidades" />
 
           <FlatList
             data={mainCategories}
@@ -157,15 +142,7 @@ export function Home() {
         </View>
 
         <View className="mt-8">
-          <View className="flex-row justify-between px-6">
-            <Text className="text-base font-medium leading-relaxed text-gray-800">
-              Aproveite a oferta
-            </Text>
-            <Pressable className="flex-row items-center space-x-1">
-              <Text className="text-gray-600">Ver mais</Text>
-              <Feather name="arrow-right" size={20} color="#737380" />
-            </Pressable>
-          </View>
+          <SectionHeader title="Aproveite a oferta" />
 
           <FlatList
             data={oferta}
