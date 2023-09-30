@@ -113,6 +113,58 @@ export function Home() {
             showsHorizontalScrollIndicator={false}
           />
         </View>
+
+        <View className="mt-8">
+          <View className="flex-row justify-between px-6">
+            <Text className="text-base font-medium leading-relaxed text-gray-800">
+              Mercados nas proximidades
+            </Text>
+            <Pressable className="flex-row items-center space-x-1">
+              <Text className="text-gray-600">Ver mais</Text>
+              <Feather name="arrow-right" size={20} color="#737380" />
+            </Pressable>
+          </View>
+
+          <FlatList
+            data={mainCategories}
+            keyExtractor={(item) => item.toString()}
+            renderItem={(item) => (
+              <View className="flex-row space-x-3 px-4 py-3 bg-gray-200 rounded-md">
+                <View className="w-16 h-16 rounded-sm overflow-hidden">
+                  <Image
+                    source={{ uri: "https://github.com/gabrielvbauer.png" }}
+                    className="w-full h-full"
+                    resizeMode="cover"
+                  />
+                </View>
+                <View>
+                  <Text className="text-base text-gray-700 leading-relaxed">
+                    Mercado xpto
+                  </Text>
+                  <Text className="text-sm text-gray-400 leading-relaxed">
+                    2.48km de você
+                  </Text>
+                </View>
+              </View>
+            )}
+            contentContainerStyle={{ paddingHorizontal: 24, marginTop: 16 }}
+            ItemSeparatorComponent={() => <View className="mr-1 ml-1" />}
+            horizontal
+            showsHorizontalScrollIndicator={false}
+          />
+        </View>
+
+        <View className="mt-8">
+          <View className="flex-row justify-between px-6">
+            <Text className="text-base font-medium leading-relaxed text-gray-800">
+              Aproveite a oferta
+            </Text>
+            <Pressable className="flex-row items-center space-x-1">
+              <Text className="text-gray-600">Ver mais</Text>
+              <Feather name="arrow-right" size={20} color="#737380" />
+            </Pressable>
+          </View>
+        </View>
       </ScrollView>
     </SafeAreaView>
   );
