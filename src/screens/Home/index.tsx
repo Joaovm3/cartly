@@ -8,6 +8,8 @@ import { BannerCard } from "@components/BannerCard";
 import { QuickAccess } from "@components/QuickAccess";
 import { Market } from "@components/Market";
 import { ProductCard } from "@components/ProductCard";
+import { useNavigation } from "@react-navigation/native";
+import { NavigatorRouteProps } from "@routes/index";
 
 const promos = [1, 2];
 const mainCategories = [
@@ -21,6 +23,14 @@ const mainCategories = [
 const oferta = [1, 2, 3, 4, 5, 6];
 
 export function Home() {
+  const navigation = useNavigation<NavigatorRouteProps>();
+
+  function handleOpenCategories() {
+    navigation.navigate("categories");
+  }
+
+  function handleOpenProduct() {}
+
   return (
     <SafeAreaView className="flex-1 bg-gray-100">
       <ScrollView>
@@ -54,7 +64,10 @@ export function Home() {
         </View>
 
         <View className="mt-8">
-          <SectionHeader title="Categorias principais" />
+          <SectionHeader
+            title="Categorias principais"
+            onSeeMorePress={handleOpenCategories}
+          />
           <FlatList
             data={mainCategories}
             keyExtractor={(item) => item.toString()}
