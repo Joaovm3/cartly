@@ -1,17 +1,15 @@
-import {
-  Text,
-  View,
-  TextInput,
-  Image,
-  FlatList,
-  Pressable,
-  ScrollView,
-} from "react-native";
+import { View, TextInput, FlatList, ScrollView } from "react-native";
 import { SafeAreaView } from "react-native-safe-area-context";
-import Feather from "@expo/vector-icons/Feather";
 
 import { Header } from "@components/Header";
-import PromotionImage from "@assets/promotion.png";
+import { SectionHeader } from "@components/SectionHeader";
+import { DeliveryStateCard } from "@components/DeliveryStateCard";
+import { BannerCard } from "@components/BannerCard";
+import { QuickAccess } from "@components/QuickAccess";
+import { Market } from "@components/Market";
+import { ProductCard } from "@components/ProductCard";
+import { useNavigation } from "@react-navigation/native";
+import { NavigatorRouteProps } from "@routes/index";
 
 const promos = [1, 2];
 const mainCategories = [
@@ -22,8 +20,17 @@ const mainCategories = [
   "Bebidas",
   "Higiêne",
 ];
+const oferta = [1, 2, 3, 4, 5, 6];
 
 export function Home() {
+  const navigation = useNavigation<NavigatorRouteProps>();
+
+  function handleOpenCategories() {
+    navigation.navigate("categories");
+  }
+
+  function handleOpenProduct() {}
+
   return (
     <SafeAreaView className="flex-1 bg-gray-100 pt-16">
       <ScrollView>
@@ -31,30 +38,7 @@ export function Home() {
         <Header />
       </View> */}
         <View className="px-6 mt-8">
-          <View className="p-4 bg-gray-200 rounded-md space-y-4">
-            <View className="flex-row items-center gap-4">
-              <Feather name="archive" size={28} color="#4CB944" />
-              <View>
-                <Text className="font-semibold text-green-500 text-base leading-relaxed">
-                  Coletando itens
-                </Text>
-                <Text className="text-gray-600 text-sm leading-4">
-                  Seus itens estão sendo coletados pelos entregadores
-                </Text>
-              </View>
-            </View>
-
-            <View className="w-full h-2 bg-green-500"></View>
-
-            <View className="flex-row justify-between items-center">
-              <Text className="text-gray-600 text-sm leading-4">
-                Entrega estimada
-              </Text>
-              <Text className="font-bold text-green-500 text-xl leading-relaxed">
-                17:48h
-              </Text>
-            </View>
-          </View>
+          <DeliveryStateCard />
         </View>
 
         <View className="px-6 mt-8">
@@ -65,51 +49,67 @@ export function Home() {
           />
         </View>
 
-        <FlatList
-          className="max-h-40 mt-8"
-          data={promos}
-          keyExtractor={(item) => item.toString()}
-          renderItem={() => (
-            <View className="bg-gray-400 rounded-md h-40 w-72 overflow-hidden">
-              <Image
-                source={PromotionImage}
-                resizeMode="cover"
-                className="w-full h-full"
-              />
-            </View>
-          )}
-          contentContainerStyle={{ paddingHorizontal: 24 }}
-          ItemSeparatorComponent={() => <View className="mr-2 ml-2" />}
-          horizontal
-          showsHorizontalScrollIndicator={false}
-        />
+        <View className="mt-8">
+          <FlatList
+            className="max-h-40"
+            data={promos}
+            keyExtractor={(item) => item.toString()}
+            renderItem={() => <BannerCard />}
+            contentContainerStyle={{ paddingHorizontal: 24 }}
+            ItemSeparatorComponent={() => <View className="mr-2 ml-2" />}
+            horizontal
+            showsHorizontalScrollIndicator={false}
+          />
+        </View>
 
         <View className="mt-8">
-          <View className="flex-row justify-between px-6">
-            <Text className="text-base font-medium leading-relaxed text-gray-800">
-              Categorias principais
-            </Text>
-            <Pressable className="flex-row items-center space-x-1">
-              <Text className="text-gray-600">Ver mais</Text>
-              <Feather name="arrow-right" size={20} color="#737380" />
-            </Pressable>
-          </View>
-
+          <SectionHeader
+            title="Categorias principais"
+            onSeeMorePress={handleOpenCategories}
+          />
           <FlatList
             data={mainCategories}
             keyExtractor={(item) => item.toString()}
-            renderItem={(item) => (
-              <View className="w-20 items-center space-y-1">
-                <View className="w-16 h-16 bg-orange-500 rounded-full flex items-center justify-center"></View>
-                <Text className="text-center text-gray-700 text-sm leading-snug">
-                  {item.item}
-                </Text>
-              </View>
-            )}
+            renderItem={({ item }) => <QuickAccess title={item} />}
             contentContainerStyle={{ paddingHorizontal: 24, marginTop: 16 }}
             ItemSeparatorComponent={() => <View className="mr-1 ml-1" />}
             horizontal
             showsHorizontalScrollIndicator={false}
+          />
+        </View>
+
+        <View className="mt-8">
+          <SectionHeader title="Mercados nas proximidades" />
+          <FlatList
+            data={mainCategories}
+            keyExtractor={(item) => item.toString()}
+            renderItem={(item) => <Market />}
+            contentContainerStyle={{ paddingHorizontal: 24, marginTop: 16 }}
+            ItemSeparatorComponent={() => <View className="mr-1 ml-1" />}
+            horizontal
+            showsHorizontalScrollIndicator={false}
+          />
+        </View>
+
+        <View className="mt-8">
+          <SectionHeader title="Aproveite a oferta" />
+          <FlatList
+            data={oferta}
+            disableVirtualization
+            keyExtractor={(item) => item.toString()}
+            renderItem={(item) => <ProductCard />}
+            contentContainerStyle={{
+              paddingHorizontal: 24,
+              marginTop: 16,
+              marginBottom: 64,
+            }}
+            numColumns={2}
+            columnWrapperStyle={{
+              gap: 24,
+            }}
+            ItemSeparatorComponent={() => <View className="my-3" />}
+            showsHorizontalScrollIndicator={false}
+            scrollEnabled={false}
           />
         </View>
       </ScrollView>
