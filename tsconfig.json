@@ -18,7 +18,10 @@
       ],
       "@assets/*": [
         "./src/assets/*"
-      ]
+      ],
+      "@constants/*": [
+        "./src/constants/*"
+      ],
     }
   }
 }
