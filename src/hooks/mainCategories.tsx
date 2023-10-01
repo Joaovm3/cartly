@@ -6,12 +6,11 @@ interface MainCategories {
 }
 
 export function useMainCategories() {
-  const mainCategories = [{} as MainCategories];
+  let mainCategories = [{} as MainCategories];
 
   const response = api
     .get("/main-categories")
     .then((response) => response.data);
-  console.log(response);
 
   return { mainCategories };
 }

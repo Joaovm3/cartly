@@ -1,7 +1,8 @@
-import StackRoutes from "./stack.routes";
+import { AppStackRoutes } from "./app.stack.routes";
+import { AuthRoutes } from "./auth.routes";
+
+const isUserAuthenticated = true;
 
 export function Routes() {
-  return (
-    <StackRoutes />
-  );
+  return isUserAuthenticated ? <AppStackRoutes /> : <AuthRoutes />;
 }

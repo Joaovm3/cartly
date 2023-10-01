@@ -10,6 +10,7 @@ import { Market } from "@components/Market";
 import { ProductCard } from "@components/ProductCard";
 import { useNavigation } from "@react-navigation/native";
 import { useMainCategories } from "@hooks/mainCategories";
+import { AppTabNavigatorProps } from "@routes/app.tab.routes";
 
 const promos = [1, 2];
 const oferta = [1, 2, 3, 4, 5, 6];
@@ -17,18 +18,18 @@ const oferta = [1, 2, 3, 4, 5, 6];
 export function Home() {
   const { mainCategories } = useMainCategories();
 
-  const navigation = useNavigation();
+  const navigation = useNavigation<AppTabNavigatorProps>();
 
   function handleOpenCategories() {
-    // navigation.navigate("");
+    navigation.navigate("categories");
   }
 
   return (
-    <SafeAreaView className="flex-1 bg-gray-100 pt-16">
-      <ScrollView>
-        {/* <View className="pt-4">
-        <Header />
-      </View> */}
+    <SafeAreaView className="flex-1 bg-gray-100">
+      <ScrollView showsVerticalScrollIndicator={false}>
+        <View className="pt-4">
+          <Header />
+        </View>
         <View className="px-6 mt-8">
           <DeliveryStateCard />
         </View>
