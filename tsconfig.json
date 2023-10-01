@@ -22,6 +22,12 @@
       "@constants/*": [
         "./src/constants/*"
       ],
+      "@hooks/*": [
+        "./src/hooks/*"
+      ],
+      "@lib/*": [
+        "./src/lib/*"
+      ]
     }
   }
 }

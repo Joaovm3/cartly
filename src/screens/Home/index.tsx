@@ -9,32 +9,24 @@ import { QuickAccess } from "@components/QuickAccess";
 import { Market } from "@components/Market";
 import { ProductCard } from "@components/ProductCard";
 import { useNavigation } from "@react-navigation/native";
-import { NavigatorRouteProps } from "@routes/index";
+import { useMainCategories } from "@hooks/mainCategories";
 
 const promos = [1, 2];
-const mainCategories = [
-  "Não perecíveis",
-  "Frutas e verduras",
-  "Carnes",
-  "Frios",
-  "Bebidas",
-  "Higiêne",
-];
 const oferta = [1, 2, 3, 4, 5, 6];
 
 export function Home() {
-  const navigation = useNavigation<NavigatorRouteProps>();
+  const { mainCategories } = useMainCategories();
+
+  const navigation = useNavigation();
 
   function handleOpenCategories() {
-    navigation.navigate("categories");
+    // navigation.navigate("");
   }
-
-  function handleOpenProduct() {}
 
   return (
     <SafeAreaView className="flex-1 bg-gray-100 pt-16">
       <ScrollView>
-      {/* <View className="pt-4">
+        {/* <View className="pt-4">
         <Header />
       </View> */}
         <View className="px-6 mt-8">
@@ -70,7 +62,7 @@ export function Home() {
           <FlatList
             data={mainCategories}
             keyExtractor={(item) => item.toString()}
-            renderItem={({ item }) => <QuickAccess title={item} />}
+            renderItem={({ item }) => <QuickAccess title={item.description} />}
             contentContainerStyle={{ paddingHorizontal: 24, marginTop: 16 }}
             ItemSeparatorComponent={() => <View className="mr-1 ml-1" />}
             horizontal
