@@ -18,6 +18,12 @@
       ],
       "@assets/*": [
         "./src/assets/*"
+      ],
+      "@hooks/*": [
+        "./src/hooks/*"
+      ],
+      "@lib/*": [
+        "./src/lib/*"
       ]
     }
   }

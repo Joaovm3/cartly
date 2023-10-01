@@ -12,7 +12,9 @@ module.exports = function(api) {
             '@screens': './src/screens',
             '@components': './src/components',
             '@routes': './src/routes',
-            '@assets': './src/assets'
+            '@assets': './src/assets',
+            '@hooks': './src/hooks',
+            '@lib': './src/lib'
           }
         }
       ]

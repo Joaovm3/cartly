@@ -1,0 +1,108 @@
+{
+  "main-categories": [
+    {
+      "id": 1,
+      "description": "Não perecíveis"
+    },
+    {
+      "id": 2,
+      "description": "Frutas e verduras"
+    },
+    {
+      "id": 3,
+      "description": "Carnes"
+    },
+    {
+      "id": 4,
+      "description": "Frios"
+    },
+    {
+      "id": 5,
+      "description": "Bebidas"
+    },
+    {
+      "id": 6,
+      "description": "Lacticínios"
+    }
+  ],
+
+  "nearby-markets": [
+    {
+      "id": 1,
+      "name": "Mercado Leopoldo",
+      "distance": 300,
+      "previewURL": "https://github.com/gabrielvbauer.png"
+    },
+    {
+      "id": 2,
+      "name": "Mercado Família",
+      "distance": 1400,
+      "previewURL": "https://github.com/gabrielvbauer.png"
+    },
+    {
+      "id": 3,
+      "name": "Copral",
+      "distance": 2480,
+      "previewURL": "https://github.com/gabrielvbauer.png"
+    }
+  ],
+
+  "offers": [
+    {
+      "id": 1,
+      "name": "Arroz Integral 1kg",
+      "brand": "Tio João",
+      "value": 5.99,
+      "previewURL": "https://example.com/arroz.jpg"
+    },
+    {
+      "id": 2,
+      "name": "Óleo de Canola 1L",
+      "brand": "Liza",
+      "value": 9.49,
+      "previewURL": "https://example.com/oleo.jpg"
+    },
+    {
+      "id": 3,
+      "name": "Leite Desnatado 1L",
+      "brand": "Nestlé",
+      "value": 3.99,
+      "previewURL": "https://example.com/leite.jpg"
+    },
+    {
+      "id": 4,
+      "name": "Café Torrado e Moído 250g",
+      "brand": "Melitta",
+      "value": 8.29,
+      "previewURL": "https://example.com/cafe.jpg"
+    },
+    {
+      "id": 5,
+      "name": "Manteiga 200g",
+      "brand": "Aviação",
+      "value": 6.79,
+      "previewURL": "https://example.com/manteiga.jpg"
+    },
+    {
+      "id": 6,
+      "name": "Maçãs (1kg)",
+      "brand": "Fazenda Frutas Frescas",
+      "value": 4.49,
+      "previewURL": "https://example.com/macas.jpg"
+    },
+    {
+      "id": 7,
+      "name": "Pão de Forma Integral",
+      "brand": "Wickbold",
+      "value": 5.29,
+      "previewURL": "https://example.com/pao.jpg"
+    },
+    {
+      "id": 8,
+      "name": "Salmão Fresco (200g)",
+      "brand": "Mar Fresco",
+      "value": 12.99,
+      "previewURL": "https://example.com/salmao.jpg"
+    }
+  ]
+}
