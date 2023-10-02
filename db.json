@@ -105,5 +105,15 @@
       "value": 12.99,
       "previewURL": "https://example.com/salmao.jpg"
     }
+  ],
+  "promos": [
+    {
+      "id": 1,
+      "imageURL": "https://github.com/gabrielvbauer.png"
+    },
+    {
+      "id": 2,
+      "imageURL": "https://github.com/gabrielvbauer.png"
+    }
   ]
 }

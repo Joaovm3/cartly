@@ -14,13 +14,13 @@ import { Loading } from "@components/Loading";
 import { useFetchMainCategories } from "@hooks/useFetchMainCategories";
 import { useFetchNearbyMarkets } from "@hooks/useFetchNearbyMarkets";
 import { useFetchOffers } from "@hooks/useFetchOffers";
-
-const promos = [1, 2];
+import { useFetchPromos } from "@hooks/useFetchPromos";
 
 export function Home() {
   const { mainCategories, isMainCategoriesLoading } = useFetchMainCategories();
   const { nearbyMarkets, isNearbyMarketsLoading } = useFetchNearbyMarkets();
   const { offers, isOffersLoading } = useFetchOffers();
+  const { promos, isPromosLoading } = useFetchPromos();
 
   const navigation = useNavigation<AppTabNavigatorProps>();
 
@@ -47,16 +47,22 @@ export function Home() {
         </View>
 
         <View className="mt-8">
-          <FlatList
-            className="max-h-40"
-            data={promos}
-            keyExtractor={(item) => item.toString()}
-            renderItem={() => <BannerCard />}
-            contentContainerStyle={{ paddingHorizontal: 24 }}
-            ItemSeparatorComponent={() => <View className="mr-2 ml-2" />}
-            horizontal
-            showsHorizontalScrollIndicator={false}
-          />
+          {isPromosLoading ? (
+            <View className="h-16 items-center justify-center">
+              <Loading />
+            </View>
+          ) : (
+            <FlatList
+              className="max-h-40"
+              data={promos}
+              keyExtractor={(item) => item.id.toString()}
+              renderItem={() => <BannerCard />}
+              contentContainerStyle={{ paddingHorizontal: 24 }}
+              ItemSeparatorComponent={() => <View className="mr-2 ml-2" />}
+              horizontal
+              showsHorizontalScrollIndicator={false}
+            />
+          )}
         </View>
 
         <View className="mt-8">
