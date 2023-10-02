@@ -34,11 +34,19 @@ export function AppTabRoutes() {
       screenOptions={{
         headerShown: false,
         tabBarStyle: {
-          height: 64,
+          position: "absolute",
+          height: 52,
+          backgroundColor: "#f5f5f5",
+          borderTopWidth: 0,
+
+          bottom: 14,
+          left: 14,
+          right: 14,
+          elevation: 0,
+          borderRadius: 8,
         },
         tabBarShowLabel: false,
         tabBarActiveTintColor: "#4CB944",
-        tabBarInactiveBackgroundColor: ACTIVE_TINT_COLOR,
       }}
     >
       <Tab.Screen
