@@ -9,14 +9,18 @@ import { QuickAccess } from "@components/QuickAccess";
 import { Market } from "@components/Market";
 import { ProductCard } from "@components/ProductCard";
 import { useNavigation } from "@react-navigation/native";
-import { useMainCategories } from "@hooks/mainCategories";
 import { AppTabNavigatorProps } from "@routes/app.tab.routes";
+import { Loading } from "@components/Loading";
+import { useFetchMainCategories } from "@hooks/useFetchMainCategories";
+import { useFetchNearbyMarkets } from "@hooks/useFetchNearbyMarkets";
+import { useFetchOffers } from "@hooks/useFetchOffers";
 
 const promos = [1, 2];
-const oferta = [1, 2, 3, 4, 5, 6];
 
 export function Home() {
-  const { mainCategories } = useMainCategories();
+  const { mainCategories, isMainCategoriesLoading } = useFetchMainCategories();
+  const { nearbyMarkets, isNearbyMarketsLoading } = useFetchNearbyMarkets();
+  const { offers, isOffersLoading } = useFetchOffers();
 
   const navigation = useNavigation<AppTabNavigatorProps>();
 
@@ -60,50 +64,73 @@ export function Home() {
             title="Categorias principais"
             onSeeMorePress={handleOpenCategories}
           />
-          <FlatList
-            data={mainCategories}
-            keyExtractor={(item) => item.toString()}
-            renderItem={({ item }) => <QuickAccess title={item.description} />}
-            contentContainerStyle={{ paddingHorizontal: 24, marginTop: 16 }}
-            ItemSeparatorComponent={() => <View className="mr-1 ml-1" />}
-            horizontal
-            showsHorizontalScrollIndicator={false}
-          />
+
+          {isMainCategoriesLoading ? (
+            <View className="h-16 items-center justify-center">
+              <Loading />
+            </View>
+          ) : (
+            <FlatList
+              data={mainCategories}
+              keyExtractor={(item) => item.id.toString()}
+              renderItem={({ item }) => (
+                <QuickAccess title={item.description} />
+              )}
+              contentContainerStyle={{ paddingHorizontal: 24, marginTop: 16 }}
+              ItemSeparatorComponent={() => <View className="mr-1 ml-1" />}
+              horizontal
+              showsHorizontalScrollIndicator={false}
+            />
+          )}
         </View>
 
         <View className="mt-8">
           <SectionHeader title="Mercados nas proximidades" />
-          <FlatList
-            data={mainCategories}
-            keyExtractor={(item) => item.toString()}
-            renderItem={(item) => <Market />}
-            contentContainerStyle={{ paddingHorizontal: 24, marginTop: 16 }}
-            ItemSeparatorComponent={() => <View className="mr-1 ml-1" />}
-            horizontal
-            showsHorizontalScrollIndicator={false}
-          />
+
+          {isNearbyMarketsLoading ? (
+            <View className="h-16 items-center justify-center">
+              <Loading />
+            </View>
+          ) : (
+            <FlatList
+              data={nearbyMarkets}
+              keyExtractor={(item) => item.id.toString()}
+              renderItem={({ item }) => <Market data={item} />}
+              contentContainerStyle={{ paddingHorizontal: 24, marginTop: 16 }}
+              ItemSeparatorComponent={() => <View className="mr-1 ml-1" />}
+              horizontal
+              showsHorizontalScrollIndicator={false}
+            />
+          )}
         </View>
 
         <View className="mt-8">
           <SectionHeader title="Aproveite a oferta" />
-          <FlatList
-            data={oferta}
-            disableVirtualization
-            keyExtractor={(item) => item.toString()}
-            renderItem={(item) => <ProductCard />}
-            contentContainerStyle={{
-              paddingHorizontal: 24,
-              marginTop: 16,
-              marginBottom: 64,
-            }}
-            numColumns={2}
-            columnWrapperStyle={{
-              gap: 24,
-            }}
-            ItemSeparatorComponent={() => <View className="my-3" />}
-            showsHorizontalScrollIndicator={false}
-            scrollEnabled={false}
-          />
+
+          {isOffersLoading ? (
+            <View className="h-16 items-center justify-center">
+              <Loading />
+            </View>
+          ) : (
+            <FlatList
+              data={offers}
+              disableVirtualization
+              keyExtractor={(item) => item.id.toString()}
+              renderItem={({ item }) => <ProductCard data={item} />}
+              contentContainerStyle={{
+                paddingHorizontal: 24,
+                marginTop: 16,
+                marginBottom: 64,
+              }}
+              numColumns={2}
+              columnWrapperStyle={{
+                gap: 24,
+              }}
+              ItemSeparatorComponent={() => <View className="my-3" />}
+              showsHorizontalScrollIndicator={false}
+              scrollEnabled={false}
+            />
+          )}
         </View>
       </ScrollView>
     </SafeAreaView>

@@ -25,28 +25,29 @@
       "description": "Lacticínios"
     }
   ],
-
   "nearby-markets": [
     {
       "id": 1,
       "name": "Mercado Leopoldo",
       "distance": 300,
+      "distanceFormatted": "300m",
       "previewURL": "https://github.com/gabrielvbauer.png"
     },
     {
       "id": 2,
       "name": "Mercado Família",
       "distance": 1400,
+      "distanceFormatted": "1.4km",
       "previewURL": "https://github.com/gabrielvbauer.png"
     },
     {
       "id": 3,
       "name": "Copral",
       "distance": 2480,
+      "distanceFormatted": "2.48km",
       "previewURL": "https://github.com/gabrielvbauer.png"
     }
   ],
-
   "offers": [
     {
       "id": 1,

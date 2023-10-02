@@ -18,7 +18,7 @@ import {
 } from "@constants/color.constants";
 
 export type DrawerRoutes = {
-  home: undefined;
+  home_3: undefined;
   orders: undefined;
   paymentMethods: undefined;
   addresses: undefined;
@@ -36,7 +36,7 @@ export type Route = {
 
 const routes: Route[] = [
   {
-    name: "home",
+    name: "home_3",
     label: "Início",
     icon: "home",
     component: AppTabRoutes,

@@ -8,7 +8,7 @@ import { Cart } from "@screens/Cart";
 import { Notification } from "@screens/Notification";
 
 export type StackRoutes = {
-  home: undefined;
+  home_2: undefined;
   cart: undefined;
   notifications: undefined;
 };
@@ -27,7 +27,7 @@ export function AppStackRoutes() {
         },
       }}
     >
-      <Stack.Screen name="home" component={AppDrawerRoutes} />
+      <Stack.Screen name="home_2" component={AppDrawerRoutes} />
       <Stack.Screen name="cart" component={Cart} />
       <Stack.Screen name="notifications" component={Notification} />
     </Stack.Navigator>

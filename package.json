@@ -8,13 +8,14 @@
     "android": "expo start --android",
     "ios": "expo start --ios",
     "web": "expo start --web",
-    "server": "json-server --watch db.json"
+    "server": "json-server --watch -H 0.0.0.0 -p 3332 db.json -d 2000"
   },
   "dependencies": {
     "@react-navigation/bottom-tabs": "^6.5.9",
     "@react-navigation/drawer": "^6.6.4",
     "@react-navigation/native": "^6.1.8",
     "@react-navigation/stack": "^6.3.18",
+    "@tanstack/react-query": "^4.35.7",
     "axios": "^1.5.1",
     "expo": "~49.0.12",
     "expo-status-bar": "~1.6.0",
