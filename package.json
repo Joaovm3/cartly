@@ -11,6 +11,7 @@
     "server": "json-server --watch -H 0.0.0.0 -p 3332 db.json -d 2000"
   },
   "dependencies": {
+    "@gorhom/bottom-sheet": "^4",
     "@react-navigation/bottom-tabs": "^6.5.9",
     "@react-navigation/drawer": "^6.6.4",
     "@react-navigation/native": "^6.1.8",
@@ -23,6 +24,7 @@
     "postcss": "^8.4.30",
     "react": "18.2.0",
     "react-native": "0.72.5",
+    "react-native-collapsible": "^1.6.1",
     "react-native-gesture-handler": "~2.12.0",
     "react-native-reanimated": "~3.3.0"
   },

@@ -1,5 +1,6 @@
 import "react-native-gesture-handler";
 import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
+import { GestureHandlerRootView } from "react-native-gesture-handler";
 
 import { StatusBar } from "expo-status-bar";
 import { NavigationContainer } from "@react-navigation/native";
@@ -14,7 +15,9 @@ export default function App() {
       <StatusBar translucent />
 
       <QueryClientProvider client={queryClient}>
-        <Routes />
+        <GestureHandlerRootView className="flex-1">
+          <Routes />
+        </GestureHandlerRootView>
       </QueryClientProvider>
     </NavigationContainer>
   );
