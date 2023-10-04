@@ -8,7 +8,8 @@
     "android": "expo start --android",
     "ios": "expo start --ios",
     "web": "expo start --web",
-    "server": "json-server --watch -H 0.0.0.0 -p 3332 db.json -d 2000"
+    "server": "json-server --watch -H 0.0.0.0 -p 3332 db.json -d 2000",
+    "server-test": "json-server --watch -p 3332 db.json -d 2000"
   },
   "dependencies": {
     "@gorhom/bottom-sheet": "^4",

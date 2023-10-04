@@ -27,6 +27,15 @@
       ],
       "@lib/*": [
         "./src/lib/*"
+      ],
+      "@contexts/*": [
+        "./src/contexts/*"
+      ],
+      "@utils/*": [
+        "./src/utils/*"
+      ],
+      "@navigation/*": [
+        "./src/navigation/*"
       ]
     }
   }

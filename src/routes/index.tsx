@@ -1,4 +1,4 @@
-import { CartContextProvider } from "src/contexts/CartContext";
+import { CartContextProvider } from "@contexts/CartContext";
 import { AppStackRoutes } from "./app.stack.routes";
 import { AuthRoutes } from "./auth.routes";
 
