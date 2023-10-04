@@ -12,11 +12,11 @@ export type StackRoutes = {
 
 export type AppCartStackNavigatorProps = StackNavigationProp<StackRoutes>;
 
-const CartStack = createStackNavigator<StackRoutes>();
+const Stack = createStackNavigator<StackRoutes>();
 
-export function CartStackScreen() {
+export function CartStack() {
   return (
-    <CartStack.Navigator
+    <Stack.Navigator
       screenOptions={{
         headerTitle: "",
         cardStyle: {
@@ -24,9 +24,9 @@ export function CartStackScreen() {
         },
       }}
     >
-      <CartStack.Screen name="cart" component={Cart} />
-      <CartStack.Screen name="checkout" component={Checkout} />
+      <Stack.Screen name="cart" component={Cart} />
+      <Stack.Screen name="checkout" component={Checkout} />
       {/* ... outros screens relacionados ao carrinho */}
-    </CartStack.Navigator>
+    </Stack.Navigator>
   );
 }

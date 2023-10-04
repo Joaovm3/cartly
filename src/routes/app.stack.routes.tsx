@@ -4,12 +4,14 @@ import {
 } from "@react-navigation/stack";
 
 import { AppDrawerRoutes } from "@routes/app.drawer.routes";
-import { Cart } from "@screens/Cart";
 import { Notification } from "@screens/Notification";
+import { Checkout } from "@screens/Checkout";
+import { Cart } from "@screens/Cart";
 
 export type StackRoutes = {
   home_2: undefined;
   cart: undefined;
+  checkout: undefined;
   notifications: undefined;
 };
 
@@ -28,7 +30,10 @@ export function AppStackRoutes() {
       }}
     >
       <Stack.Screen name="home_2" component={AppDrawerRoutes} />
-      <Stack.Screen name="cart" component={Cart} />
+      <Stack.Group>
+        <Stack.Screen name="cart" component={Cart} />
+        <Stack.Screen name="checkout" component={Checkout} />
+      </Stack.Group>
       <Stack.Screen name="notifications" component={Notification} />
     </Stack.Navigator>
   );
