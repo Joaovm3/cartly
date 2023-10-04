@@ -23,11 +23,14 @@
     "postcss": "^8.4.30",
     "react": "18.2.0",
     "react-native": "0.72.5",
+    "react-native-dotenv": "^3.4.9",
     "react-native-gesture-handler": "~2.12.0",
     "react-native-reanimated": "~3.3.0"
   },
   "devDependencies": {
     "@babel/core": "^7.20.0",
+    "@types/node": "^20.8.2",
+    "@types/react-native-dotenv": "^0.2.0",
     "@types/react": "~18.2.14",
     "babel-plugin-module-resolver": "^5.0.0",
     "json-server": "^0.17.4",
