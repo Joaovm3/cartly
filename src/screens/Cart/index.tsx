@@ -1,51 +1,22 @@
 import { useContext, useMemo } from "react";
-import { ScrollView, SectionList, Text, View } from "react-native";
+import { ScrollView, Text, View } from "react-native";
 import { SafeAreaView } from "react-native-safe-area-context";
 import { TouchableOpacity } from "react-native-gesture-handler";
 
 import BottomSheet from "@gorhom/bottom-sheet";
 
-import { CartItem } from "@components/CartItem";
 import { useNavigation } from "@react-navigation/native";
 
 import Feather from "@expo/vector-icons/Feather";
-import { CartContext, CartProduct } from "@contexts/CartContext";
+import { CartContext } from "@contexts/CartContext";
 import { AppCartStackNavigatorProps } from "@navigation/Cart/CartStack";
-
-type SectionListDataType = {
-  title: string;
-  data: CartProduct[];
-};
+import { CartProductList } from "@components/CartProductList";
 
 export function Cart() {
-  const {
-    products,
-    removeProductFromCart,
-    totalPriceFormatted,
-    totalItems,
-    increaseProductAmount,
-    decreaseProductAmount,
-  } = useContext(CartContext);
+  const { totalPriceFormatted, totalItems } = useContext(CartContext);
 
   const navigation = useNavigation<AppCartStackNavigatorProps>();
   const snapPoints = useMemo(() => [80, "22%"], []);
-
-  const productsCategories = [
-    ...new Set(products.map((product) => product.product.category)),
-  ].sort();
-  const cartData = productsCategories.reduce((arr, category) => {
-    const categoryProducts = products.filter(
-      (product) => product.product.category === category
-    );
-
-    return [
-      ...arr,
-      {
-        title: category,
-        data: categoryProducts,
-      },
-    ];
-  }, [] as SectionListDataType[]);
 
   function handleGoBack() {
     navigation.goBack();
@@ -53,18 +24,6 @@ export function Cart() {
 
   function handleFinishBuying() {
     navigation.navigate("checkout");
-  }
-
-  function handleRemoveProductFromCart(cartProductId: string) {
-    removeProductFromCart(cartProductId);
-  }
-
-  function handleIncreaseProductAmount(cartProductId: string) {
-    increaseProductAmount(cartProductId);
-  }
-
-  function handleDecreaseProductAmount(cartProductId: string) {
-    decreaseProductAmount(cartProductId);
   }
 
   return (
@@ -76,30 +35,8 @@ export function Cart() {
 
         <Text className="text-2xl font-medium leading-relaxed">Carrinho</Text>
 
-        <View className="mt-5">
-          <SectionList
-            sections={cartData}
-            keyExtractor={(item) => item.id}
-            renderSectionHeader={({ section }) => (
-              <Text className="text-base text-gray-900 font-medium -mb-3">
-                {section.title}
-              </Text>
-            )}
-            renderItem={({ item }) => (
-              <CartItem
-                data={item}
-                onRemoveProduct={handleRemoveProductFromCart}
-                onIncreaseProductAmount={handleIncreaseProductAmount}
-                onDecreaseProductAmount={handleDecreaseProductAmount}
-              />
-            )}
-            SectionSeparatorComponent={() => <View className="mb-6"></View>}
-            ItemSeparatorComponent={() => <View className="mt-2 mb-2" />}
-            contentContainerStyle={{
-              paddingBottom: 200,
-            }}
-            scrollEnabled={false}
-          />
+        <View className="mt-5 pb-52">
+          <CartProductList />
         </View>
       </ScrollView>
 
