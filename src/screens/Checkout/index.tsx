@@ -7,16 +7,20 @@ import {
 } from "react-native";
 import { SafeAreaView } from "react-native-safe-area-context";
 import Feather from "@expo/vector-icons/Feather";
-import { AppCartStackNavigatorProps } from "@navigation/Cart/CartStack";
 import { useNavigation } from "@react-navigation/core";
 import { CartProductList } from "@components/CartProductList";
 import { Separator } from "@components/Separator";
+import { AppStackNavigatorProps } from "@routes/app.stack.routes";
 
 export function Checkout() {
-  const navigation = useNavigation<AppCartStackNavigatorProps>();
+  const navigation = useNavigation<AppStackNavigatorProps>();
 
   function handleGoBack() {
     navigation.goBack();
+  }
+
+  function handleFinishBuying() {
+    navigation.navigate("payment_confirmation");
   }
 
   return (
@@ -133,7 +137,10 @@ export function Checkout() {
             </View>
           </View>
 
-          <TouchableOpacity className="h-14 w-full bg-green-500 rounded-md items-center justify-center mt-6">
+          <TouchableOpacity
+            className="h-14 w-full bg-green-500 rounded-md items-center justify-center mt-6"
+            onPress={handleFinishBuying}
+          >
             <Text className="text-base text-gray-100 font-medium">
               Finalizar compra
             </Text>

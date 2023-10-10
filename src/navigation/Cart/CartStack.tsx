@@ -4,6 +4,7 @@ import {
 } from "@react-navigation/stack";
 import { Cart } from "@screens/Cart";
 import { Checkout } from "@screens/Checkout";
+import { PaymentConfirmation } from "@screens/PaymentConfirmation";
 
 export type StackRoutes = {
   cart: undefined;
@@ -26,7 +27,6 @@ export function CartStack() {
     >
       <Stack.Screen name="cart" component={Cart} />
       <Stack.Screen name="checkout" component={Checkout} />
-      {/* ... outros screens relacionados ao carrinho */}
     </Stack.Navigator>
   );
 }
