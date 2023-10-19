@@ -1,13 +1,13 @@
-import { Text } from "react-native";
+import { Text } from 'react-native'
 
 interface HeadingProps {
-  children: React.ReactNode;
+  children: React.ReactNode
 }
 
 export function Heading({ children }: HeadingProps) {
   return (
-    <Text className="text-base text-gray-900 leading-relaxed font-medium">
+    <Text className="text-base font-medium leading-relaxed text-gray-900">
       {children}
     </Text>
-  );
+  )
 }

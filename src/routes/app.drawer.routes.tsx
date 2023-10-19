@@ -1,73 +1,73 @@
 import {
   DrawerNavigationProp,
   createDrawerNavigator,
-} from "@react-navigation/drawer";
-import Feather from "@expo/vector-icons/Feather";
-import { AppTabRoutes } from "@routes/app.tab.routes";
+} from '@react-navigation/drawer'
+import Feather from '@expo/vector-icons/Feather'
+import { AppTabRoutes } from '@routes/app.tab.routes'
 
-import { Drawer as DrawerComponent } from "@components/Drawer";
-import { Order } from "@screens/Order";
-import { PaymentMethod } from "@screens/PaymentMethod";
-import { Address } from "@screens/Address";
-import { Settings } from "@screens/Settings";
+import { Drawer as DrawerComponent } from '@components/Drawer'
+import { Order } from '@screens/Order'
+import { PaymentMethod } from '@screens/PaymentMethod'
+import { Address } from '@screens/Address'
+import { Settings } from '@screens/Settings'
 
 import {
   ACTIVE_BACKGROUND_COLOR,
   ACTIVE_TINT_COLOR,
   INACTIVE_TINT_COLOR,
-} from "@constants/color.constants";
+} from '@constants/color.constants'
 
 export type DrawerRoutes = {
-  home_3: undefined;
-  orders: undefined;
-  paymentMethods: undefined;
-  addresses: undefined;
-  settings: undefined;
-};
+  home_3: undefined
+  orders: undefined
+  paymentMethods: undefined
+  addresses: undefined
+  settings: undefined
+}
 
-export type AppDrawerNavigatorProps = DrawerNavigationProp<DrawerRoutes>;
+export type AppDrawerNavigatorProps = DrawerNavigationProp<DrawerRoutes>
 
 export type Route = {
-  name: keyof DrawerRoutes;
-  label: string;
-  icon: keyof typeof Feather.glyphMap;
-  component: React.FC;
-};
+  name: keyof DrawerRoutes
+  label: string
+  icon: keyof typeof Feather.glyphMap
+  component: React.FC
+}
 
 const routes: Route[] = [
   {
-    name: "home_3",
-    label: "Início",
-    icon: "home",
+    name: 'home_3',
+    label: 'Início',
+    icon: 'home',
     component: AppTabRoutes,
   },
   {
-    name: "orders",
-    label: "Pedidos",
-    icon: "clipboard",
+    name: 'orders',
+    label: 'Pedidos',
+    icon: 'clipboard',
     component: Order,
   },
   {
-    name: "paymentMethods",
-    label: "Formas de pagamento",
-    icon: "credit-card",
+    name: 'paymentMethods',
+    label: 'Formas de pagamento',
+    icon: 'credit-card',
     component: PaymentMethod,
   },
   {
-    name: "addresses",
-    label: "Endereços",
-    icon: "map-pin",
+    name: 'addresses',
+    label: 'Endereços',
+    icon: 'map-pin',
     component: Address,
   },
   {
-    name: "settings",
-    label: "Configurações",
-    icon: "settings",
+    name: 'settings',
+    label: 'Configurações',
+    icon: 'settings',
     component: Settings,
   },
-];
+]
 
-const Drawer = createDrawerNavigator<DrawerRoutes>();
+const Drawer = createDrawerNavigator<DrawerRoutes>()
 
 export function AppDrawerRoutes() {
   return (
@@ -84,7 +84,7 @@ export function AppDrawerRoutes() {
           component={route.component}
           options={{
             drawerLabel: route.label,
-            drawerIcon: ({ focused, size }) => (
+            drawerIcon: ({ focused }) => (
               <Feather
                 name={route.icon}
                 style={{ marginRight: -20 }}
@@ -99,5 +99,5 @@ export function AppDrawerRoutes() {
         />
       ))}
     </Drawer.Navigator>
-  );
+  )
 }

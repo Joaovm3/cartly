@@ -1,46 +1,46 @@
-import React from "react";
-import { View, TouchableHighlight, Text, Image } from "react-native";
-import Feather from "@expo/vector-icons/Feather";
+import React from 'react'
+import { View, TouchableHighlight, Text, Image } from 'react-native'
+import Feather from '@expo/vector-icons/Feather'
 
 interface ProductCardProps {
   data: {
-    name: string;
-    brand: string;
-    value: number;
-    previewURL: string;
-  };
+    name: string
+    brand: string
+    value: number
+    previewURL: string
+  }
 }
 
 export function ProductCard({ data }: ProductCardProps) {
-  const formattedValue = data.value.toLocaleString("pt-BR");
+  const formattedValue = data.value.toLocaleString('pt-BR')
 
   return (
-    <View className="bg-gray-200 flex-1 rounded-md overflow-hidden">
-      <View className="w-full max-h-40">
+    <View className="flex-1 overflow-hidden rounded-md bg-gray-200">
+      <View className="max-h-40 w-full">
         <Image
-          source={{ uri: "https://github.com/gabrielvbauer.png" }}
-          className="w-full h-full"
+          source={{ uri: 'https://github.com/gabrielvbauer.png' }}
+          className="h-full w-full"
         />
       </View>
 
-      <View className="p-3 space-y-2">
+      <View className="space-y-2 p-3">
         <View>
-          <Text className="text-base text-gray-900 font-medium leading-none">
+          <Text className="text-base font-medium leading-none text-gray-900">
             {data.name}
           </Text>
-          <Text className="text-base text-gray-600 font-normal leading-relaxed mt-1">
+          <Text className="mt-1 text-base font-normal leading-relaxed text-gray-600">
             {data.brand}
           </Text>
         </View>
-        <View className="flex-row justify-between items-center">
-          <Text className="text-lg text-gray-900 font-medium leadind-relaxed">
+        <View className="flex-row items-center justify-between">
+          <Text className="leadind-relaxed text-lg font-medium text-gray-900">
             R$ {formattedValue}
           </Text>
-          <TouchableHighlight className="w-12 h-12 bg-green-500 items-center justify-center rounded-lg">
+          <TouchableHighlight className="h-12 w-12 items-center justify-center rounded-lg bg-green-500">
             <Feather name="shopping-cart" size={18} color="#FFF" />
           </TouchableHighlight>
         </View>
       </View>
     </View>
-  );
+  )
 }

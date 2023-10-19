@@ -1,8 +1,8 @@
-import { CartContextProvider } from "@contexts/CartContext";
-import { AppStackRoutes } from "./app.stack.routes";
-import { AuthRoutes } from "./auth.routes";
+import { CartContextProvider } from '@contexts/CartContext'
+import { AppStackRoutes } from './app.stack.routes'
+import { AuthRoutes } from './auth.routes'
 
-const isUserAuthenticated = true;
+const isUserAuthenticated = true
 
 export function Routes() {
   return isUserAuthenticated ? (
@@ -11,5 +11,5 @@ export function Routes() {
     </CartContextProvider>
   ) : (
     <AuthRoutes />
-  );
+  )
 }

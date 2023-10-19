@@ -1,33 +1,33 @@
-import { View, Text, Image } from "react-native";
+import { View, Text, Image } from 'react-native'
 
 type MarketType = {
-  name: string;
-  distanceFormatted: string;
-  previewURL: string;
-};
+  name: string
+  distanceFormatted: string
+  previewURL: string
+}
 
 interface MarketProps {
-  data: MarketType;
+  data: MarketType
 }
 
 export function Market({ data }: MarketProps) {
   return (
-    <View className="flex-row space-x-3 px-4 py-3 bg-gray-200 rounded-md">
-      <View className="w-16 h-16 rounded-sm overflow-hidden">
+    <View className="flex-row space-x-3 rounded-md bg-gray-200 px-4 py-3">
+      <View className="h-16 w-16 overflow-hidden rounded-sm">
         <Image
           source={{ uri: data.previewURL }}
-          className="w-full h-full"
+          className="h-full w-full"
           resizeMode="cover"
         />
       </View>
       <View>
-        <Text className="text-base text-gray-700 leading-relaxed">
+        <Text className="text-base leading-relaxed text-gray-700">
           {data.name}
         </Text>
-        <Text className="text-sm text-gray-400 leading-relaxed">
+        <Text className="text-sm leading-relaxed text-gray-400">
           {data.distanceFormatted} de você
         </Text>
       </View>
     </View>
-  );
+  )
 }

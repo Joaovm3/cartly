@@ -1,12 +1,12 @@
-import { CartContext, CartProduct } from "@contexts/CartContext";
-import { useContext } from "react";
-import { SectionList, View, Text } from "react-native";
-import { CartItem } from "./CartItem";
+import { CartContext, CartProduct } from '@contexts/CartContext'
+import { useContext } from 'react'
+import { SectionList, View, Text } from 'react-native'
+import { CartItem } from './CartItem'
 
 type SectionListDataType = {
-  title: string;
-  data: CartProduct[];
-};
+  title: string
+  data: CartProduct[]
+}
 
 export function CartProductList() {
   const {
@@ -14,15 +14,15 @@ export function CartProductList() {
     removeProductFromCart,
     increaseProductAmount,
     decreaseProductAmount,
-  } = useContext(CartContext);
+  } = useContext(CartContext)
 
   const productsCategories = [
     ...new Set(products.map((product) => product.product.category)),
-  ].sort();
+  ].sort()
   const cartData = productsCategories.reduce((arr, category) => {
     const categoryProducts = products.filter(
-      (product) => product.product.category === category
-    );
+      (product) => product.product.category === category,
+    )
 
     return [
       ...arr,
@@ -30,19 +30,19 @@ export function CartProductList() {
         title: category,
         data: categoryProducts,
       },
-    ];
-  }, [] as SectionListDataType[]);
+    ]
+  }, [] as SectionListDataType[])
 
   function handleRemoveProductFromCart(cartProductId: string) {
-    removeProductFromCart(cartProductId);
+    removeProductFromCart(cartProductId)
   }
 
   function handleIncreaseProductAmount(cartProductId: string) {
-    increaseProductAmount(cartProductId);
+    increaseProductAmount(cartProductId)
   }
 
   function handleDecreaseProductAmount(cartProductId: string) {
-    decreaseProductAmount(cartProductId);
+    decreaseProductAmount(cartProductId)
   }
 
   return (
@@ -50,7 +50,7 @@ export function CartProductList() {
       sections={cartData}
       keyExtractor={(item) => item.id}
       renderSectionHeader={({ section }) => (
-        <Text className="text-base text-gray-900 font-medium -mb-3">
+        <Text className="-mb-3 text-base font-medium text-gray-900">
           {section.title}
         </Text>
       )}
@@ -63,8 +63,8 @@ export function CartProductList() {
         />
       )}
       SectionSeparatorComponent={() => <View className="mb-6"></View>}
-      ItemSeparatorComponent={() => <View className="mt-2 mb-2" />}
+      ItemSeparatorComponent={() => <View className="mb-2 mt-2" />}
       scrollEnabled={false}
     />
-  );
+  )
 }

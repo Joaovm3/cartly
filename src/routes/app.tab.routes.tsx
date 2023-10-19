@@ -1,32 +1,27 @@
 import {
   BottomTabNavigationProp,
   createBottomTabNavigator,
-} from "@react-navigation/bottom-tabs";
+} from '@react-navigation/bottom-tabs'
 
-import Feather from "@expo/vector-icons/Feather";
+import Feather from '@expo/vector-icons/Feather'
 
-import { Categories } from "@screens/Categories";
-import { History } from "@screens/History";
-import { Home } from "@screens/Home";
-import { Search } from "@screens/Search";
+import { Categories } from '@screens/Categories'
+import { History } from '@screens/History'
+import { Home } from '@screens/Home'
+import { Search } from '@screens/Search'
 
-import {
-  ACTIVE_BACKGROUND_COLOR,
-  ACTIVE_TINT_COLOR,
-} from "@constants/color.constants";
-
-const ICON_SIZE = 24;
+const ICON_SIZE = 24
 
 export type TabRoutes = {
-  home: undefined;
-  search: undefined;
-  categories: undefined;
-  history: undefined;
-};
+  home: undefined
+  search: undefined
+  categories: undefined
+  history: undefined
+}
 
-export type AppTabNavigatorProps = BottomTabNavigationProp<TabRoutes>;
+export type AppTabNavigatorProps = BottomTabNavigationProp<TabRoutes>
 
-const Tab = createBottomTabNavigator<TabRoutes>();
+const Tab = createBottomTabNavigator<TabRoutes>()
 
 export function AppTabRoutes() {
   return (
@@ -34,9 +29,9 @@ export function AppTabRoutes() {
       screenOptions={{
         headerShown: false,
         tabBarStyle: {
-          position: "absolute",
+          position: 'absolute',
           height: 52,
-          backgroundColor: "#f5f5f5",
+          backgroundColor: '#f5f5f5',
           borderTopWidth: 0,
 
           bottom: 14,
@@ -46,7 +41,7 @@ export function AppTabRoutes() {
           borderRadius: 8,
         },
         tabBarShowLabel: false,
-        tabBarActiveTintColor: "#4CB944",
+        tabBarActiveTintColor: '#4CB944',
       }}
     >
       <Tab.Screen
@@ -86,5 +81,5 @@ export function AppTabRoutes() {
         }}
       />
     </Tab.Navigator>
-  );
+  )
 }

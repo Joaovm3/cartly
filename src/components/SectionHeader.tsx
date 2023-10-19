@@ -1,11 +1,11 @@
-import React from "react";
-import { View, Pressable, Text } from "react-native";
-import Feather from "@expo/vector-icons/Feather";
-import { Heading } from "./Heading";
+import React from 'react'
+import { View, Pressable, Text } from 'react-native'
+import Feather from '@expo/vector-icons/Feather'
+import { Heading } from './Heading'
 
 interface SectionHeaderProps {
-  title: string;
-  onSeeMorePress?: () => void;
+  title: string
+  onSeeMorePress?: () => void
 }
 
 export function SectionHeader({ title, onSeeMorePress }: SectionHeaderProps) {
@@ -20,5 +20,5 @@ export function SectionHeader({ title, onSeeMorePress }: SectionHeaderProps) {
         <Feather name="arrow-right" size={20} color="#737380" />
       </Pressable>
     </View>
-  );
+  )
 }

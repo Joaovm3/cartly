@@ -1,20 +1,20 @@
-import { createStackNavigator } from '@react-navigation/stack';
-import { Notification } from '@screens/Notification';
+import { createStackNavigator } from '@react-navigation/stack'
+import { Notification } from '@screens/Notification'
 
-const NotificationStack = createStackNavigator();
+const NotificationStack = createStackNavigator()
 
-export function NotificationStackScreen () {
+export function NotificationStackScreen() {
   return (
-    <NotificationStack.Navigator 
+    <NotificationStack.Navigator
       screenOptions={{
         headerTitle: '',
         cardStyle: {
-          backgroundColor: "white"
-        }
+          backgroundColor: 'white',
+        },
       }}
     >
       <NotificationStack.Screen name="notification" component={Notification} />
-      {/* ... outras screens relacionadas as notificações...*/}
+      {/* ... outras screens relacionadas as notificações... */}
     </NotificationStack.Navigator>
-  );
+  )
 }

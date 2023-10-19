@@ -1,27 +1,27 @@
 import {
   StackNavigationProp,
   createStackNavigator,
-} from "@react-navigation/stack";
+} from '@react-navigation/stack'
 
-import { AppDrawerRoutes } from "@routes/app.drawer.routes";
-import { Notification } from "@screens/Notification";
-import { Checkout } from "@screens/Checkout";
-import { Cart } from "@screens/Cart";
-import { PaymentConfirmation } from "@screens/PaymentConfirmation";
-import { GroceryMode } from "@screens/GroceryMode";
+import { AppDrawerRoutes } from '@routes/app.drawer.routes'
+import { Notification } from '@screens/Notification'
+import { Checkout } from '@screens/Checkout'
+import { Cart } from '@screens/Cart'
+import { PaymentConfirmation } from '@screens/PaymentConfirmation'
+import { GroceryMode } from '@screens/GroceryMode'
 
 export type StackRoutes = {
-  home_2: undefined;
-  cart: undefined;
-  checkout: undefined;
-  notifications: undefined;
-  payment_confirmation: undefined;
-  grocery_mode: undefined;
-};
+  home_2: undefined
+  cart: undefined
+  checkout: undefined
+  notifications: undefined
+  payment_confirmation: undefined
+  grocery_mode: undefined
+}
 
-export type AppStackNavigatorProps = StackNavigationProp<StackRoutes>;
+export type AppStackNavigatorProps = StackNavigationProp<StackRoutes>
 
-const Stack = createStackNavigator<StackRoutes>();
+const Stack = createStackNavigator<StackRoutes>()
 
 export function AppStackRoutes() {
   return (
@@ -29,7 +29,7 @@ export function AppStackRoutes() {
       screenOptions={{
         headerShown: false,
         cardStyle: {
-          backgroundColor: "white",
+          backgroundColor: 'white',
         },
       }}
       initialRouteName="grocery_mode"
@@ -46,5 +46,5 @@ export function AppStackRoutes() {
       <Stack.Screen name="grocery_mode" component={GroceryMode} />
       <Stack.Screen name="notifications" component={Notification} />
     </Stack.Navigator>
-  );
+  )
 }

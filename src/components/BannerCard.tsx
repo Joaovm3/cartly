@@ -1,14 +1,14 @@
-import { View, Image } from "react-native";
-import PromotionImage from "@assets/promotion.png";
+import { View, Image } from 'react-native'
+import PromotionImage from '@assets/promotion.png'
 
 export function BannerCard() {
   return (
-    <View className="bg-gray-400 rounded-md h-40 w-72 overflow-hidden">
+    <View className="h-40 w-72 overflow-hidden rounded-md bg-gray-400">
       <Image
         source={PromotionImage}
         resizeMode="cover"
-        className="w-full h-full"
+        className="h-full w-full"
       />
     </View>
-  );
+  )
 }

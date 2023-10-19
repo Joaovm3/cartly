@@ -1,3 +1,3 @@
-export const ACTIVE_TINT_COLOR = "#FFFFFF";
-export const INACTIVE_TINT_COLOR = "#000000";
-export const ACTIVE_BACKGROUND_COLOR = "#4CB944"; 
+export const ACTIVE_TINT_COLOR = '#FFFFFF'
+export const INACTIVE_TINT_COLOR = '#000000'
+export const ACTIVE_BACKGROUND_COLOR = '#4CB944'

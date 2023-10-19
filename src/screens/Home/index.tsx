@@ -1,31 +1,31 @@
-import { View, TextInput, FlatList, ScrollView } from "react-native";
-import { SafeAreaView } from "react-native-safe-area-context";
+import { View, TextInput, FlatList, ScrollView } from 'react-native'
+import { SafeAreaView } from 'react-native-safe-area-context'
 
-import { Header } from "@components/Header";
-import { SectionHeader } from "@components/SectionHeader";
-import { DeliveryStateCard } from "@components/DeliveryStateCard";
-import { BannerCard } from "@components/BannerCard";
-import { QuickAccess } from "@components/QuickAccess";
-import { Market } from "@components/Market";
-import { ProductCard } from "@components/ProductCard";
-import { useNavigation } from "@react-navigation/native";
-import { AppTabNavigatorProps } from "@routes/app.tab.routes";
-import { Loading } from "@components/Loading";
-import { useFetchMainCategories } from "@hooks/useFetchMainCategories";
-import { useFetchNearbyMarkets } from "@hooks/useFetchNearbyMarkets";
-import { useFetchOffers } from "@hooks/useFetchOffers";
-import { useFetchPromos } from "@hooks/useFetchPromos";
+import { Header } from '@components/Header'
+import { SectionHeader } from '@components/SectionHeader'
+import { DeliveryStateCard } from '@components/DeliveryStateCard'
+import { BannerCard } from '@components/BannerCard'
+import { QuickAccess } from '@components/QuickAccess'
+import { Market } from '@components/Market'
+import { ProductCard } from '@components/ProductCard'
+import { useNavigation } from '@react-navigation/native'
+import { AppTabNavigatorProps } from '@routes/app.tab.routes'
+import { Loading } from '@components/Loading'
+import { useFetchMainCategories } from '@hooks/useFetchMainCategories'
+import { useFetchNearbyMarkets } from '@hooks/useFetchNearbyMarkets'
+import { useFetchOffers } from '@hooks/useFetchOffers'
+import { useFetchPromos } from '@hooks/useFetchPromos'
 
 export function Home() {
-  const { mainCategories, isMainCategoriesLoading } = useFetchMainCategories();
-  const { nearbyMarkets, isNearbyMarketsLoading } = useFetchNearbyMarkets();
-  const { offers, isOffersLoading } = useFetchOffers();
-  const { promos, isPromosLoading } = useFetchPromos();
+  const { mainCategories, isMainCategoriesLoading } = useFetchMainCategories()
+  const { nearbyMarkets, isNearbyMarketsLoading } = useFetchNearbyMarkets()
+  const { offers, isOffersLoading } = useFetchOffers()
+  const { promos, isPromosLoading } = useFetchPromos()
 
-  const navigation = useNavigation<AppTabNavigatorProps>();
+  const navigation = useNavigation<AppTabNavigatorProps>()
 
   function handleOpenCategories() {
-    navigation.navigate("categories");
+    navigation.navigate('categories')
   }
 
   return (
@@ -34,13 +34,13 @@ export function Home() {
         <View className="pt-4">
           <Header />
         </View>
-        <View className="px-6 mt-8">
+        <View className="mt-8 px-6">
           <DeliveryStateCard />
         </View>
 
-        <View className="px-6 mt-8">
+        <View className="mt-8 px-6">
           <TextInput
-            className="h-14 bg-gray-200 rounded-md pl-4 placeholder:text-gray-600 placeholder:text-base"
+            className="h-14 rounded-md bg-gray-200 pl-4 placeholder:text-base placeholder:text-gray-600"
             placeholder="Busque por mercados e produtos"
             cursorColor="#4CB944"
           />
@@ -58,7 +58,7 @@ export function Home() {
               keyExtractor={(item) => item.id.toString()}
               renderItem={() => <BannerCard />}
               contentContainerStyle={{ paddingHorizontal: 24 }}
-              ItemSeparatorComponent={() => <View className="mr-2 ml-2" />}
+              ItemSeparatorComponent={() => <View className="ml-2 mr-2" />}
               horizontal
               showsHorizontalScrollIndicator={false}
             />
@@ -83,7 +83,7 @@ export function Home() {
                 <QuickAccess title={item.description} />
               )}
               contentContainerStyle={{ paddingHorizontal: 24, marginTop: 16 }}
-              ItemSeparatorComponent={() => <View className="mr-1 ml-1" />}
+              ItemSeparatorComponent={() => <View className="ml-1 mr-1" />}
               horizontal
               showsHorizontalScrollIndicator={false}
             />
@@ -103,7 +103,7 @@ export function Home() {
               keyExtractor={(item) => item.id.toString()}
               renderItem={({ item }) => <Market data={item} />}
               contentContainerStyle={{ paddingHorizontal: 24, marginTop: 16 }}
-              ItemSeparatorComponent={() => <View className="mr-1 ml-1" />}
+              ItemSeparatorComponent={() => <View className="ml-1 mr-1" />}
               horizontal
               showsHorizontalScrollIndicator={false}
             />
@@ -140,5 +140,5 @@ export function Home() {
         </View>
       </ScrollView>
     </SafeAreaView>
-  );
+  )
 }

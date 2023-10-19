@@ -1,5 +1,5 @@
-import { ActivityIndicator } from "react-native";
+import { ActivityIndicator } from 'react-native'
 
 export function Loading() {
-  return <ActivityIndicator color={"#4CB944"} />;
+  return <ActivityIndicator color={'#4CB944'} />
 }
