@@ -8,6 +8,7 @@ import { Notification } from "@screens/Notification";
 import { Checkout } from "@screens/Checkout";
 import { Cart } from "@screens/Cart";
 import { PaymentConfirmation } from "@screens/PaymentConfirmation";
+import { GroceryMode } from "@screens/GroceryMode";
 
 export type StackRoutes = {
   home_2: undefined;
@@ -15,6 +16,7 @@ export type StackRoutes = {
   checkout: undefined;
   notifications: undefined;
   payment_confirmation: undefined;
+  grocery_mode: undefined;
 };
 
 export type AppStackNavigatorProps = StackNavigationProp<StackRoutes>;
@@ -30,7 +32,7 @@ export function AppStackRoutes() {
           backgroundColor: "white",
         },
       }}
-      initialRouteName="payment_confirmation"
+      initialRouteName="grocery_mode"
     >
       <Stack.Screen name="home_2" component={AppDrawerRoutes} />
       <Stack.Group>
@@ -41,6 +43,7 @@ export function AppStackRoutes() {
           component={PaymentConfirmation}
         />
       </Stack.Group>
+      <Stack.Screen name="grocery_mode" component={GroceryMode} />
       <Stack.Screen name="notifications" component={Notification} />
     </Stack.Navigator>
   );

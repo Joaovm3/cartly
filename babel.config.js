@@ -18,7 +18,8 @@ module.exports = function(api) {
             '@lib': './src/lib',
             '@contexts': './src/contexts',
             '@utils': './src/utils',
-            '@navigation': './src/navigation'
+            '@navigation': './src/navigation',
+            '@theme': './src/theme'
           }
         }
       ],

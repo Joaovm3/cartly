@@ -36,6 +36,9 @@
       ],
       "@navigation/*": [
         "./src/navigation/*"
+      ],
+      "@theme/*": [
+        "./src/theme/*"
       ]
     }
   }
