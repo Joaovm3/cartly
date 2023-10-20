@@ -43,6 +43,7 @@ export function AppTabRoutes() {
         tabBarShowLabel: false,
         tabBarActiveTintColor: '#4CB944',
       }}
+      initialRouteName="categories"
     >
       <Tab.Screen
         name="home"

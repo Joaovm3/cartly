@@ -115,5 +115,37 @@
       "id": 2,
       "imageURL": "https://github.com/gabrielvbauer.png"
     }
+  ],
+  "categories": [
+    {
+      "id": 1,
+      "description": "Lacticínios",
+      "icon": "droplet"
+    },
+    {
+      "id": 2,
+      "description": "Frutas e verduras",
+      "icon": "droplet"
+    },
+    {
+      "id": 3,
+      "description": "Carnes",
+      "icon": "droplet"
+    },
+    {
+      "id": 4,
+      "description": "Frios",
+      "icon": "droplet"
+    },
+    {
+      "id": 5,
+      "description": "Bebidas",
+      "icon": "droplet"
+    },
+    {
+      "id": 6,
+      "description": "Lacticínios",
+      "icon": "droplet"
+    }
   ]
 }

@@ -32,7 +32,6 @@ export function AppStackRoutes() {
           backgroundColor: 'white',
         },
       }}
-      initialRouteName="grocery_mode"
     >
       <Stack.Screen name="home_2" component={AppDrawerRoutes} />
       <Stack.Group>
