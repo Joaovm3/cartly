@@ -3,7 +3,7 @@ import {
   createDrawerNavigator,
 } from '@react-navigation/drawer'
 import Feather from '@expo/vector-icons/Feather'
-import { AppTabRoutes } from '@routes/app.tab.routes'
+import { HomeTabRoutes } from '@navigation/HomeTabs/HomeTabs'
 
 import { Drawer as DrawerComponent } from '@components/Drawer'
 import { Order } from '@screens/Order'
@@ -39,7 +39,7 @@ const routes: Route[] = [
     name: 'home_3',
     label: 'Início',
     icon: 'home',
-    component: AppTabRoutes,
+    component: HomeTabRoutes,
   },
   {
     name: 'orders',

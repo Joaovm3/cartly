@@ -11,6 +11,7 @@ import { useNavigation } from '@react-navigation/core'
 import { CartProductList } from '@components/CartProductList'
 import { Separator } from '@components/Separator'
 import { AppStackNavigatorProps } from '@routes/app.stack.routes'
+import { PageTitle } from '@components/PageTitle'
 
 export function Checkout() {
   const navigation = useNavigation<AppStackNavigatorProps>()
@@ -33,9 +34,7 @@ export function Checkout() {
           <Feather name="arrow-left" size={24} color={'#29292E'} />
         </TouchableOpacity>
 
-        <Text className="text-2xl font-medium leading-relaxed">
-          Finalizando compra
-        </Text>
+        <PageTitle title="Finalizando compra" />
 
         <View className="mt-5">
           <CartProductList />

@@ -1,4 +1,9 @@
-import { TouchableOpacity, TouchableOpacityProps, Text } from 'react-native'
+import {
+  TouchableOpacity,
+  TouchableOpacityProps,
+  Text,
+  View,
+} from 'react-native'
 import Feather from '@expo/vector-icons/Feather'
 
 interface CategoryCardProps extends TouchableOpacityProps {
@@ -18,16 +23,14 @@ export function CategoryCard({
   return (
     <TouchableOpacity
       activeOpacity={0.6}
-      className="relative h-28 flex-1 rounded-md bg-gray-200 p-4"
+      className="flex-1 rounded-md bg-gray-200 p-4"
       onPress={() => onCategoryPress(categoryId)}
       {...rest}
     >
       <Text className="text-base font-medium text-gray-900">{title}</Text>
-      <Feather
-        name={icon}
-        className="absolute bottom-0 left-0 right-0 opacity-5"
-        size={80}
-      />
+      <View className="items-end opacity-5">
+        <Feather name={icon} size={64} />
+      </View>
     </TouchableOpacity>
   )
 }

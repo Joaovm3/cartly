@@ -2,19 +2,20 @@ import React from 'react'
 import { ScrollView, View, Text, FlatList } from 'react-native'
 import { SafeAreaView } from 'react-native-safe-area-context'
 import { useNavigation } from '@react-navigation/native'
-import { AppStackNavigatorProps } from '@routes/app.stack.routes'
 import { CategoryCard } from '@components/CategoryCard'
 import { useFetchCategories } from '@hooks/useFetchCategories'
 import { Loading } from '@components/Loading'
+import { CategoriesStackNavigatorProps } from '@navigation/Categories/CategoriesStack'
 
 export function Categories() {
   const { categories, isCategoriesLoading } = useFetchCategories()
 
-  const navigation = useNavigation<AppStackNavigatorProps>()
+  const navigation = useNavigation<CategoriesStackNavigatorProps>()
 
   function handleGoToCategory(id: number) {
-    console.log(id)
-    navigation.canGoBack()
+    navigation.navigate('category', {
+      categoryId: id,
+    })
   }
 
   return (

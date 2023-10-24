@@ -23,7 +23,7 @@ export type AppTabNavigatorProps = BottomTabNavigationProp<TabRoutes>
 
 const Tab = createBottomTabNavigator<TabRoutes>()
 
-export function AppTabRoutes() {
+export function HomeTabRoutes() {
   return (
     <Tab.Navigator
       screenOptions={{
@@ -43,7 +43,7 @@ export function AppTabRoutes() {
         tabBarShowLabel: false,
         tabBarActiveTintColor: '#4CB944',
       }}
-      initialRouteName="categories"
+      initialRouteName="home"
     >
       <Tab.Screen
         name="home"
