@@ -11,6 +11,8 @@ import { Rating } from '@components/Rating'
 import { SelectedMarket } from '@components/SelectedMarket'
 import { Market } from '@components/Market'
 import { FlatList } from 'react-native-gesture-handler'
+import { useCart } from '@hooks/useCart'
+import { useNavigation } from '@react-navigation/native'
 
 const data = [
   {
@@ -36,7 +38,30 @@ const data = [
   },
 ]
 
-export function Product() {
+interface ProductProps {
+  product: {
+    id: string
+    name: string
+    brand: string
+    category: string
+    price: number
+  }
+}
+
+export function Product({ product }: ProductProps) {
+  const { addProductToCart } = useCart()
+  const { goBack } = useNavigation()
+
+  function handleAddProductToCart() {
+    addProductToCart(product.id)
+  }
+
+  function handleFavoriteProduct() {}
+
+  function handleGoBack() {
+    goBack()
+  }
+
   return (
     <>
       <ScrollView className="flex-1 bg-gray-100">
@@ -47,12 +72,12 @@ export function Product() {
           className="h-96"
         >
           <View className="mt-14 flex-row items-center justify-between px-6">
-            <TouchableOpacity>
+            <TouchableOpacity onPress={handleGoBack}>
               <Feather name="arrow-left" color={THEME.COLORS.WHITE} size={24} />
             </TouchableOpacity>
 
             <View className="flex-row items-center space-x-4">
-              <TouchableOpacity>
+              <TouchableOpacity onPress={handleFavoriteProduct}>
                 <Feather name="heart" color={THEME.COLORS.WHITE} size={24} />
               </TouchableOpacity>
 
@@ -140,7 +165,10 @@ export function Product() {
 
       <View className="absolute bottom-20 w-full px-6">
         <View className="flex-row space-x-3 rounded-md bg-gray-200 px-3 py-3">
-          <TouchableOpacity className="h-14 flex-1 items-center justify-center rounded-md bg-green-500">
+          <TouchableOpacity
+            className="h-14 flex-1 items-center justify-center rounded-md bg-green-500"
+            onPress={handleAddProductToCart}
+          >
             <Text className="text-base font-medium text-gray-100">
               Adicionar ao carrinho
             </Text>

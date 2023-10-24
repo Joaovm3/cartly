@@ -4,14 +4,16 @@ import Feather from '@expo/vector-icons/Feather'
 
 interface ProductCardProps {
   data: {
+    id: string
     name: string
     brand: string
     value: number
     previewURL: string
   }
+  onAddProductToCart: (productId: string) => void
 }
 
-export function ProductCard({ data }: ProductCardProps) {
+export function ProductCard({ data, onAddProductToCart }: ProductCardProps) {
   const formattedValue = data.value.toLocaleString('pt-BR')
 
   return (
@@ -36,7 +38,10 @@ export function ProductCard({ data }: ProductCardProps) {
           <Text className="leadind-relaxed text-lg font-medium text-gray-900">
             R$ {formattedValue}
           </Text>
-          <TouchableHighlight className="h-12 w-12 items-center justify-center rounded-lg bg-green-500">
+          <TouchableHighlight
+            className="h-12 w-12 items-center justify-center rounded-lg bg-green-500"
+            onPress={() => onAddProductToCart(data.id)}
+          >
             <Feather name="shopping-cart" size={18} color="#FFF" />
           </TouchableHighlight>
         </View>

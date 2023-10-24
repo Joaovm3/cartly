@@ -147,5 +147,71 @@
       "description": "Lacticínios",
       "icon": "droplet"
     }
+  ],
+  "products": [
+    {
+      "id": 1,
+      "name": "Arroz Integral 1kg",
+      "brand": "Tio João",
+      "price": 5.99,
+      "category": "Lacticinios",
+      "previewURL": "https://example.com/arroz.jpg"
+    },
+    {
+      "id": 2,
+      "name": "Óleo de Canola 1L",
+      "brand": "Liza",
+      "price": 9.49,
+      "category": "Lacticinios",
+      "previewURL": "https://example.com/oleo.jpg"
+    },
+    {
+      "id": 3,
+      "name": "Leite Desnatado 1L",
+      "brand": "Nestlé",
+      "price": 3.99,
+      "category": "Lacticinios",
+      "previewURL": "https://example.com/leite.jpg"
+    },
+    {
+      "id": 4,
+      "name": "Café Torrado e Moído 250g",
+      "brand": "Melitta",
+      "price": 8.29,
+      "category": "Lacticinios",
+      "previewURL": "https://example.com/cafe.jpg"
+    },
+    {
+      "id": 5,
+      "name": "Manteiga 200g",
+      "brand": "Aviação",
+      "price": 6.79,
+      "category": "Lacticinios",
+      "previewURL": "https://example.com/manteiga.jpg"
+    },
+    {
+      "id": 6,
+      "name": "Maçãs (1kg)",
+      "brand": "Fazenda Frutas Frescas",
+      "price": 4.49,
+      "category": "Lacticinios",
+      "previewURL": "https://example.com/macas.jpg"
+    },
+    {
+      "id": 7,
+      "name": "Pão de Forma Integral",
+      "brand": "Wickbold",
+      "price": 5.29,
+      "category": "Lacticinios",
+      "previewURL": "https://example.com/pao.jpg"
+    },
+    {
+      "id": 8,
+      "name": "Salmão Fresco (200g)",
+      "brand": "Mar Fresco",
+      "price": 12.99,
+      "category": "Lacticinios",
+      "previewURL": "https://example.com/salmao.jpg"
+    }
   ]
 }

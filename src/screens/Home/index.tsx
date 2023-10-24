@@ -15,6 +15,7 @@ import { useFetchMainCategories } from '@hooks/useFetchMainCategories'
 import { useFetchNearbyMarkets } from '@hooks/useFetchNearbyMarkets'
 import { useFetchOffers } from '@hooks/useFetchOffers'
 import { useFetchPromos } from '@hooks/useFetchPromos'
+import { useCart } from '@hooks/useCart'
 
 export function Home() {
   const { mainCategories, isMainCategoriesLoading } = useFetchMainCategories()
@@ -22,10 +23,16 @@ export function Home() {
   const { offers, isOffersLoading } = useFetchOffers()
   const { promos, isPromosLoading } = useFetchPromos()
 
+  const { addProductToCart } = useCart()
+
   const navigation = useNavigation<AppTabNavigatorProps>()
 
   function handleOpenCategories() {
     navigation.navigate('categories')
+  }
+
+  function handleAddProductToCart(productId: string) {
+    addProductToCart(productId)
   }
 
   return (
@@ -122,7 +129,12 @@ export function Home() {
               data={offers}
               disableVirtualization
               keyExtractor={(item) => item.id.toString()}
-              renderItem={({ item }) => <ProductCard data={item} />}
+              renderItem={({ item }) => (
+                <ProductCard
+                  data={item}
+                  onAddProductToCart={handleAddProductToCart}
+                />
+              )}
               contentContainerStyle={{
                 paddingHorizontal: 24,
                 marginTop: 16,

@@ -5,6 +5,7 @@ import { StackScreenProps } from '@react-navigation/stack'
 import { CategoriesRoutes } from '@navigation/Categories/CategoriesStack'
 import { PageTitle } from '@components/PageTitle'
 import { ProductCard } from '@components/ProductCard'
+import { useCart } from '@hooks/useCart'
 
 export interface CategoryRouteParams {
   categoryId: number
@@ -12,56 +13,56 @@ export interface CategoryRouteParams {
 
 const products = [
   {
-    id: 1,
+    id: '1',
     name: 'Arroz Integral 1kg',
     brand: 'Tio João',
     value: 5.99,
     previewURL: 'https://example.com/arroz.jpg',
   },
   {
-    id: 2,
+    id: '2',
     name: 'Óleo de Canola 1L',
     brand: 'Liza',
     value: 9.49,
     previewURL: 'https://example.com/oleo.jpg',
   },
   {
-    id: 3,
+    id: '3',
     name: 'Leite Desnatado 1L',
     brand: 'Nestlé',
     value: 3.99,
     previewURL: 'https://example.com/leite.jpg',
   },
   {
-    id: 4,
+    id: '4',
     name: 'Café Torrado e Moído 250g',
     brand: 'Melitta',
     value: 8.29,
     previewURL: 'https://example.com/cafe.jpg',
   },
   {
-    id: 5,
+    id: '5',
     name: 'Manteiga 200g',
     brand: 'Aviação',
     value: 6.79,
     previewURL: 'https://example.com/manteiga.jpg',
   },
   {
-    id: 6,
+    id: '6',
     name: 'Maçãs (1kg)',
     brand: 'Fazenda Frutas Frescas',
     value: 4.49,
     previewURL: 'https://example.com/macas.jpg',
   },
   {
-    id: 7,
+    id: '7',
     name: 'Pão de Forma Integral',
     brand: 'Wickbold',
     value: 5.29,
     previewURL: 'https://example.com/pao.jpg',
   },
   {
-    id: 8,
+    id: '8',
     name: 'Salmão Fresco (200g)',
     brand: 'Mar Fresco',
     value: 12.99,
@@ -72,8 +73,14 @@ const products = [
 interface Props extends StackScreenProps<CategoriesRoutes, 'category'> {}
 
 export function Category({ route }: Props) {
+  const { addProductToCart } = useCart()
+
   const { params } = route
   console.log(params)
+
+  function handleAddProductToCart(productId: string) {
+    addProductToCart(productId)
+  }
 
   return (
     <SafeAreaView className="flex-1 bg-gray-100">
@@ -91,11 +98,13 @@ export function Category({ route }: Props) {
           renderItem={({ item }) => (
             <ProductCard
               data={{
+                id: item.id,
                 name: item.name,
                 brand: item.brand,
                 value: item.value,
                 previewURL: item.previewURL,
               }}
+              onAddProductToCart={handleAddProductToCart}
             />
           )}
           contentContainerStyle={{

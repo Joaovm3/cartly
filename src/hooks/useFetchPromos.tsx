@@ -2,7 +2,7 @@ import { useQuery } from '@tanstack/react-query'
 import { api } from '@lib/api'
 
 type PromosResponse = {
-  id: number
+  id: string
 }
 
 export function useFetchPromos() {

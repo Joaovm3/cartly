@@ -2,7 +2,7 @@ import { useQuery } from '@tanstack/react-query'
 import { api } from '@lib/api'
 
 type OffersDataResponse = {
-  id: number
+  id: string
   name: string
   brand: string
   value: number
