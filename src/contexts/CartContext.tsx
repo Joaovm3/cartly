@@ -1,16 +1,14 @@
 import { api } from '@lib/api'
 import { currencyFormatter } from '@utils/formatter'
 import { createContext, useMemo, useState } from 'react'
-import { v4 } from 'uuid'
+import { randomUUID } from 'expo-crypto'
 
 type ProductAPIResponse = {
-  product: {
-    id: string
-    name: string
-    brand: string
-    price: number
-    category: string
-  }
+  id: string
+  name: string
+  brand: string
+  price: number
+  category: string
 }
 
 export type CartProduct = {
@@ -63,13 +61,22 @@ export function CartContextProvider({ children }: CartContextProvderProps) {
   }, [products])
 
   async function addProductToCart(productId: string) {
+    const productAlreadyAdded = products.find(
+      (product) => product.product.id === productId,
+    )
+
+    if (productAlreadyAdded) {
+      increaseProductAmount(productAlreadyAdded.id)
+      return
+    }
+
     const { data } = await api.get<ProductAPIResponse>(`/products/${productId}`)
 
     const cardProduct: CartProduct = {
-      id: v4(),
+      id: randomUUID(),
       amount: 1,
-      product: data.product,
-      productTotalPrice: data.product.price,
+      product: data,
+      productTotalPrice: data.price,
     }
 
     const newProductList = [...products, cardProduct]
