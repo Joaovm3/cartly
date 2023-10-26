@@ -4,12 +4,12 @@ import {
 } from '@react-navigation/stack'
 import { Categories } from '@screens/Categories'
 import { Category, CategoryRouteParams } from '@screens/Category'
-import { Product } from '@screens/Product'
+import { Product, ProductRouteParams } from '@screens/Product'
 
 export type CategoriesRoutes = {
   categories: undefined
   category: CategoryRouteParams
-  product: undefined
+  product: ProductRouteParams
 }
 
 export type CategoriesStackNavigatorProps =
@@ -23,7 +23,6 @@ export function CategoriesStackRoutes() {
       screenOptions={{
         headerShown: false,
       }}
-      initialRouteName="product"
     >
       <CategoriesStack.Screen name="categories" component={Categories} />
       <CategoriesStack.Screen name="category" component={Category} />

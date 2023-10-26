@@ -13,6 +13,8 @@ import { Market } from '@components/Market'
 import { FlatList } from 'react-native-gesture-handler'
 import { useCart } from '@hooks/useCart'
 import { useNavigation } from '@react-navigation/native'
+import { StackScreenProps } from '@react-navigation/stack'
+import { CategoriesRoutes } from '@navigation/Categories/CategoriesStack'
 
 const data = [
   {
@@ -38,22 +40,19 @@ const data = [
   },
 ]
 
-interface ProductProps {
-  product: {
-    id: string
-    name: string
-    brand: string
-    category: string
-    price: number
-  }
+export interface ProductRouteParams {
+  productId: string
 }
 
-export function Product({ product }: ProductProps) {
+interface Props extends StackScreenProps<CategoriesRoutes, 'product'> {}
+
+export function Product({ route }: Props) {
+  const { productId } = route.params
   const { addProductToCart } = useCart()
   const { goBack } = useNavigation()
 
   function handleAddProductToCart() {
-    addProductToCart(product.id)
+    addProductToCart(productId)
   }
 
   function handleFavoriteProduct() {}

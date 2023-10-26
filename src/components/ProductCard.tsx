@@ -1,5 +1,11 @@
 import React from 'react'
-import { View, TouchableHighlight, Text, Image } from 'react-native'
+import {
+  View,
+  TouchableHighlight,
+  Text,
+  Image,
+  TouchableOpacity,
+} from 'react-native'
 import Feather from '@expo/vector-icons/Feather'
 
 interface ProductCardProps {
@@ -11,13 +17,21 @@ interface ProductCardProps {
     previewURL: string
   }
   onAddProductToCart: (productId: string) => void
+  onPress: (productId: string) => void
 }
 
-export function ProductCard({ data, onAddProductToCart }: ProductCardProps) {
+export function ProductCard({
+  data,
+  onAddProductToCart,
+  onPress,
+}: ProductCardProps) {
   const formattedValue = data.value.toLocaleString('pt-BR')
 
   return (
-    <View className="flex-1 overflow-hidden rounded-md bg-gray-200">
+    <TouchableOpacity
+      className="flex-1 overflow-hidden rounded-md bg-gray-200"
+      onPress={() => onPress(data.id)}
+    >
       <View className="max-h-40 w-full">
         <Image
           source={{ uri: 'https://github.com/gabrielvbauer.png' }}
@@ -46,6 +60,6 @@ export function ProductCard({ data, onAddProductToCart }: ProductCardProps) {
           </TouchableHighlight>
         </View>
       </View>
-    </View>
+    </TouchableOpacity>
   )
 }

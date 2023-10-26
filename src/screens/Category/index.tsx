@@ -2,10 +2,14 @@ import { SafeAreaView } from 'react-native-safe-area-context'
 import { FlatList, ScrollView, View } from 'react-native'
 import { PageHeader } from '@components/PageHeader'
 import { StackScreenProps } from '@react-navigation/stack'
-import { CategoriesRoutes } from '@navigation/Categories/CategoriesStack'
+import {
+  CategoriesRoutes,
+  CategoriesStackNavigatorProps,
+} from '@navigation/Categories/CategoriesStack'
 import { PageTitle } from '@components/PageTitle'
 import { ProductCard } from '@components/ProductCard'
 import { useCart } from '@hooks/useCart'
+import { useNavigation } from '@react-navigation/native'
 
 export interface CategoryRouteParams {
   categoryId: number
@@ -73,13 +77,17 @@ const products = [
 interface Props extends StackScreenProps<CategoriesRoutes, 'category'> {}
 
 export function Category({ route }: Props) {
+  const navigation = useNavigation<CategoriesStackNavigatorProps>()
   const { addProductToCart } = useCart()
 
   const { params } = route
-  console.log(params)
 
   function handleAddProductToCart(productId: string) {
     addProductToCart(productId)
+  }
+
+  function handleOpenProduct(productId: string) {
+    navigation.navigate('product', { productId })
   }
 
   return (
@@ -104,6 +112,7 @@ export function Category({ route }: Props) {
                 value: item.value,
                 previewURL: item.previewURL,
               }}
+              onPress={handleOpenProduct}
               onAddProductToCart={handleAddProductToCart}
             />
           )}
