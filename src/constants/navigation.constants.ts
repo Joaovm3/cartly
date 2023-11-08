@@ -1,0 +1,40 @@
+export const NAVIGATION = {
+  // STACK: {
+  //   LOGIN: {
+  //     INDEX: 'LoginStack',
+  //     FORGOT_PASSWORD: 'ForgotPasswordStack',
+  //     CREATE_ACCOUNT: 'CreateAccountStack',
+  //   },
+  //   HOME: {
+  //     INDEX: 'HomeStack',
+  //     CART: 'CartStack',
+  //     NOTIFICATIONS: 'NotificationsStack',
+  //   },
+  // },
+  // TAB: {
+  //   HOME: 'HomeTab',
+  //   SEARCH: 'SearchTab',
+  //   CATEGORIES: 'CategoriesTab',
+  //   HISTORY: 'HistoryTab',
+  // },
+  // DRAWER: {
+  //   HOME: 'HomeDrawer',
+  //   ORDER: 'OrderDrawer',
+  //   PAYMENT_METHODS: 'PaymentMethodsDrawer',
+  //   ADDRESS: 'AddressDrawer',
+  //   SETTINGS: 'SettingsDrawer',
+  // },
+  LOGIN: 'Login',
+  FORGOT_PASSWORD: 'ForgotPassword',
+  CREATE_ACCOUNT: 'CreateAccount',
+  HOME: 'Home',
+  SEARCH: 'Search',
+  CATEGORIES: 'Categories',
+  HISTORY: 'History',
+  ORDER: 'Order',
+  PAYMENT_METHODS: 'PaymentMethods',
+  ADDRESS: 'Address',
+  SETTINGS: 'Settings',
+  CART: 'Cart',
+  NOTIFICATIONS: 'Notifications',
+}

@@ -31,7 +31,7 @@ export function Drawer(props: DrawerContentComponentProps) {
       </DrawerContentScrollView>
 
       <TouchableOpacity
-        onPress={() => navigation.navigate("Login")}
+        onPress={() => navigation.navigate("login")}
         activeOpacity={0.7}
       >
         <View className="flex-row py-4 px-2 mb-12 mx-2 bg-gray-200 rounded-md">
