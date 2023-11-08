@@ -7,7 +7,7 @@ import { Category, CategoryRouteParams } from '@screens/Category'
 import { Product, ProductRouteParams } from '@screens/Product'
 
 export type CategoriesRoutes = {
-  categories: undefined
+  categoriesList: undefined
   category: CategoryRouteParams
   product: ProductRouteParams
 }
@@ -24,7 +24,7 @@ export function CategoriesStackRoutes() {
         headerShown: false,
       }}
     >
-      <CategoriesStack.Screen name="categories" component={Categories} />
+      <CategoriesStack.Screen name="categoriesList" component={Categories} />
       <CategoriesStack.Screen name="category" component={Category} />
       <CategoriesStack.Screen name="product" component={Product} />
     </CategoriesStack.Navigator>

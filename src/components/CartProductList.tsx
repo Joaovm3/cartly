@@ -64,6 +64,11 @@ export function CartProductList() {
       )}
       SectionSeparatorComponent={() => <View className="mb-6"></View>}
       ItemSeparatorComponent={() => <View className="mb-2 mt-2" />}
+      ListEmptyComponent={() => (
+        <View className="items-center justify-center">
+          <Text className="text-gray-500">Nenhum item adicionado</Text>
+        </View>
+      )}
       scrollEnabled={false}
     />
   )

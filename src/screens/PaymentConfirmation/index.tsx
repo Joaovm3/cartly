@@ -9,7 +9,7 @@ export function PaymentConfirmation() {
   const navigation = useNavigation<AppStackNavigatorProps>()
 
   function handleGoToInitialScreen() {
-    navigation.navigate('home_2')
+    navigation.navigate('home')
   }
 
   return (

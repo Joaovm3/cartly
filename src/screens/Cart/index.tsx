@@ -35,7 +35,7 @@ export function Cart() {
 
         <Text className="text-2xl font-medium leading-relaxed">Carrinho</Text>
 
-        <View className="mt-5 pb-52">
+        <View className="mt-5">
           <CartProductList />
         </View>
       </ScrollView>

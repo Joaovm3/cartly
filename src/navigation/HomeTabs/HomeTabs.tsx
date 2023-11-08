@@ -8,14 +8,17 @@ import Feather from '@expo/vector-icons/Feather'
 import { History } from '@screens/History'
 import { Home } from '@screens/Home'
 import { Search } from '@screens/Search'
-import { CategoriesStackRoutes } from '@navigation/Categories/CategoriesStack'
+import {
+  CategoriesRoutes,
+  CategoriesStackRoutes,
+} from '@navigation/Categories/CategoriesStack'
 
 const ICON_SIZE = 24
 
 export type TabRoutes = {
   home: undefined
   search: undefined
-  categories: undefined
+  categories: { id: string }
   history: undefined
 }
 

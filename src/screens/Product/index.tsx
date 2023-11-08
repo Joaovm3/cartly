@@ -15,6 +15,8 @@ import { useCart } from '@hooks/useCart'
 import { useNavigation } from '@react-navigation/native'
 import { StackScreenProps } from '@react-navigation/stack'
 import { CategoriesRoutes } from '@navigation/Categories/CategoriesStack'
+import Toast from 'react-native-toast-message'
+import { useFetchProduct } from '@hooks/useFetchProducts'
 
 const data = [
   {
@@ -50,9 +52,16 @@ export function Product({ route }: Props) {
   const { productId } = route.params
   const { addProductToCart } = useCart()
   const { goBack } = useNavigation()
+  const { product } = useFetchProduct(productId)
+  console.log(product)
 
   function handleAddProductToCart() {
     addProductToCart(productId)
+
+    Toast.show({
+      type: 'success',
+      text1: 'Produto adicionado ao carrinho!',
+    })
   }
 
   function handleFavoriteProduct() {}
@@ -94,9 +103,11 @@ export function Product({ route }: Props) {
         <View className="mt-6 px-6">
           <View className="flex-row items-center justify-between">
             <View>
-              <Text className="text-sm font-medium text-gray-600">Moça</Text>
+              <Text className="text-sm font-medium text-gray-600">
+                {product?.brand}
+              </Text>
               <Text className="text-xl font-medium text-gray-900">
-                Leite Condensado
+                {product?.name}
               </Text>
             </View>
 
@@ -104,7 +115,9 @@ export function Product({ route }: Props) {
           </View>
 
           <View className="mt-5 flex-row items-baseline">
-            <Text className="text-3xl font-medium text-gray-900">R$ 34,99</Text>
+            <Text className="text-3xl font-medium text-gray-900">
+              R$ {product?.price}
+            </Text>
             <Text className="text-base font-medium text-gray-600">/kg</Text>
           </View>
         </View>
@@ -147,7 +160,7 @@ export function Product({ route }: Props) {
           />
         </View>
 
-        <View className="mt-10 px-6">
+        <View className="mt-10 px-6 pb-52">
           <View className="mb-3 flex-row items-center justify-between">
             <Text className="text-lg font-medium text-gray-700">Descrição</Text>
           </View>

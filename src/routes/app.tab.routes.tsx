@@ -15,7 +15,8 @@ const ICON_SIZE = 24
 export type TabRoutes = {
   home: undefined
   search: undefined
-  categories: undefined
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
+  categories: any
   history: undefined
 }
 

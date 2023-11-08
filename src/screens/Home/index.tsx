@@ -16,7 +16,6 @@ import { useFetchNearbyMarkets } from '@hooks/useFetchNearbyMarkets'
 import { useFetchOffers } from '@hooks/useFetchOffers'
 import { useFetchPromos } from '@hooks/useFetchPromos'
 import { useCart } from '@hooks/useCart'
-import { CategoriesStackNavigatorProps } from '@navigation/Categories/CategoriesStack'
 
 export function Home() {
   const { mainCategories, isMainCategoriesLoading } = useFetchMainCategories()
@@ -27,7 +26,6 @@ export function Home() {
   const { addProductToCart } = useCart()
 
   const navigation = useNavigation<AppTabNavigatorProps>()
-  const stackNavigation = useNavigation<CategoriesStackNavigatorProps>()
 
   function handleOpenCategories() {
     navigation.navigate('categories')
@@ -38,7 +36,12 @@ export function Home() {
   }
 
   function handleOpenProduct(productId: string) {
-    stackNavigation.navigate('product', { productId })
+    navigation.navigate('categories', {
+      screen: 'product',
+      params: {
+        productId,
+      },
+    })
   }
 
   return (

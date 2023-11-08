@@ -7,6 +7,7 @@ import {
   TouchableOpacity,
 } from 'react-native'
 import Feather from '@expo/vector-icons/Feather'
+import Toast from 'react-native-toast-message'
 
 interface ProductCardProps {
   data: {
@@ -26,6 +27,15 @@ export function ProductCard({
   onPress,
 }: ProductCardProps) {
   const formattedValue = data.value.toLocaleString('pt-BR')
+
+  function handleAddProductToCart() {
+    onAddProductToCart(data.id)
+
+    Toast.show({
+      type: 'success',
+      text1: 'Produto adicionado ao carrinho!',
+    })
+  }
 
   return (
     <TouchableOpacity
@@ -54,7 +64,7 @@ export function ProductCard({
           </Text>
           <TouchableHighlight
             className="h-12 w-12 items-center justify-center rounded-lg bg-green-500"
-            onPress={() => onAddProductToCart(data.id)}
+            onPress={handleAddProductToCart}
           >
             <Feather name="shopping-cart" size={18} color="#FFF" />
           </TouchableHighlight>
