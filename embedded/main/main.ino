@@ -1,108 +1,79 @@
-/*
-    Go to thingspeak.com and create an account if you don't have one already.
-    After logging in, click on the "New Channel" button to create a new channel for your data. This is where your data will be stored and displayed.
-    Fill in the Name, Description, and other fields for your channel as desired, then click the "Save Channel" button.
-    Take note of the "Write API Key" located in the "API keys" tab, this is the key you will use to send data to your channel.
-    Replace the channelID from tab "Channel Settings" and privateKey with "Read API Keys" from "API Keys" tab.
-    Replace the host variable with the thingspeak server hostname "api.thingspeak.com"
-    Upload the sketch to your ESP32 board and make sure that the board is connected to the internet. The ESP32 should now send data to your Thingspeak channel at the intervals specified by the loop function.
-    Go to the channel view page on thingspeak and check the "Field1" for the new incoming data.
-    You can use the data visualization and analysis tools provided by Thingspeak to display and process your data in various ways.
-    Please note, that Thingspeak accepts only integer values.
-
-    You can later check the values at https://thingspeak.com/channels/2005329
-    Please note that this public channel can be accessed by anyone and it is possible that more people will write their values.
- */
-
 #include <WiFi.h>
+#include <FirebaseESP32.h>
 
-const char* ssid     = "Joao"; // Change this to your WiFi SSID
-const char* password = "12345678"; // Change this to your WiFi password
+// Replace with your network credentials
+const char* ssid = "Visitante";
+const char* password = "";
 
-const char* host = "api.thingspeak.com"; // This should not be changed
-const int httpPort = 80; // This should not be changed
-const String channelID   = "2005329"; // Change this to your channel ID
-const String writeApiKey = "V6YOTILH9I7D51F9"; // Change this to your Write API key
-const String readApiKey = "34W6LGLIFXD56MPM"; // Change this to your Read API key
+// Firebase project credentials - Esta deve ser a chave privada do arquivo JSON de serviço que você possui.
+// Este é apenas um exemplo. Você precisa passar o JSON como uma string aqui.
 
-// The default example accepts one data filed named "field1"
-// For your own server you can ofcourse create more of them.
-int field1 = 0;
+#define FIREBASE_AUTH "kjhgfdsdfghjk"
 
-int numberOfResults = 3; // Number of results to be read
-int fieldNumber = 1; // Field number which will be read out
+// Firestore document path
+#define FIRESTORE_PATH "projects/cartly-app/databases/(default)/documents/orders"
 
-void setup()
-{
-    Serial.begin(115200);
-    while(!Serial){delay(100);}
+FirebaseData firebaseData;
 
-    // We start by connecting to a WiFi network
+void setup() {
+  Serial.begin(9600);
 
-    Serial.println();
-    Serial.println("******************************************************");
-    Serial.print("Connecting to ");
-    Serial.println(ssid);
+  // Aguarde a conexão do Serial para iniciar o programa
+  while (!Serial) {
+    delay(100);
+  }
 
-    WiFi.begin(ssid, password);
+  Serial.println();
+  Serial.println("******************************************************");
+  Serial.print("Connecting to ");
+  Serial.println(ssid);
 
-    while (WiFi.status() != WL_CONNECTED) {
-        delay(500);
-        Serial.print(".");
-    }
+  WiFi.begin(ssid, password);
 
-    Serial.println("");
-    Serial.println("WiFi connected");
-    Serial.println("IP address: ");
-    Serial.println(WiFi.localIP());
+  while (WiFi.status() != WL_CONNECTED) {
+    delay(500);
+    Serial.print(".");
+  }
+
+  Serial.println("");
+  Serial.println("WiFi connected");
+  Serial.println("IP address: ");
+  Serial.println(WiFi.localIP());
+
+  // A função Firebase.begin() abaixo precisa ser modificada para utilizar a chave de serviço JSON.
+  // A biblioteca que você está usando pode não suportar diretamente a autenticação Firestore; portanto, isso pode não funcionar.
+  Firebase.begin(FIREBASE_HOST, FIREBASE_AUTH);
+  Firebase.reconnectWiFi(true);
+
+  // Começar a ouvir as alterações no Firestore pode não ser suportado diretamente.
+  // Este é um placeholder baseado na sua descrição. A funcionalidade real depende da biblioteca que você está usando.
+  if (!Firebase.beginStream(firebaseData, FIRESTORE_PATH)) {
+    Serial.println("Could not begin stream");
+    Serial.println("REASON: " + firebaseData.errorReason());
+  }
 }
 
-void readResponse(WiFiClient *client){
-  unsigned long timeout = millis();
-  while(client->available() == 0){
-    if(millis() - timeout > 5000){
-      Serial.println(">>> Client Timeout !");
-      client->stop();
-      return;
-    }
+void loop() {
+  // Novamente, a leitura de dados do Firestore como mostrado pode não ser suportada diretamente.
+  // Isso é um exemplo genérico e pode não funcionar como esperado sem a biblioteca correta.
+  if (!Firebase.readStream(firebaseData)) {
+    Serial.println("Stream read error");
+    Serial.println("REASON: " + firebaseData.errorReason());
   }
 
-  // Read all the lines of the reply from server and print them to Serial
-  while(client->available()) {
-    String line = client->readStringUntil('\r');
-    Serial.print(line);
+  if (firebaseData.streamTimeout()) {
+    Serial.println("Stream timeout, resume streaming...");
+    Firebase.resumeStream(firebaseData);
   }
 
-  Serial.printf("\nClosing connection\n\n");
-}
+  if (firebaseData.streamAvailable()) {
+    Serial.println("Stream Data available...");
+    Serial.println(firebaseData.streamPath());
+    Serial.println(firebaseData.dataPath());
+    Serial.println(firebaseData.dataType());
+    Serial.println(firebaseData.jsonData());
 
-void loop(){
-  WiFiClient client;
-  String footer = String(" HTTP/1.1\r\n") + "Host: " + String(host) + "\r\n" + "Connection: close\r\n\r\n";
-
-  // WRITE --------------------------------------------------------------------------------------------
-  if (!client.connect(host, httpPort)) {
-    return;
+    // Processamento adicional para exibir os dados desejados do Firebase
+    // ...
   }
-
-  client.print("GET /update?api_key=" + writeApiKey + "&field1=" + field1 + footer);
-  readResponse(&client);
-
-  // READ --------------------------------------------------------------------------------------------
-
-  String readRequest = "GET /channels/" + channelID + "/fields/" + fieldNumber + ".json?results=" + numberOfResults + " HTTP/1.1\r\n" +
-                       "Host: " + host + "\r\n" +
-                       "Connection: close\r\n\r\n";
-
-  if (!client.connect(host, httpPort)) {
-    return;
-  }
-
-  client.print(readRequest);
-  readResponse(&client);
-
-  // -------------------------------------------------------------------------------------------------
-
-  ++field1;
-  delay(10000);
 }
