@@ -1,9 +1,20 @@
-module.exports = function(api) {
-  api.cache(true);
+module.exports = function (api) {
+  api.cache(true)
   return {
     presets: ['babel-preset-expo'],
     plugins: [
-      ["nativewind/babel"], 
+      ['nativewind/babel'],
+      [
+        'module:react-native-dotenv',
+        {
+          moduleName: '@env',
+          path: '.env',
+          blacklist: null,
+          whitelist: null,
+          safe: false,
+          allowUndefined: true,
+        },
+      ],
       [
         'module-resolver',
         {
@@ -19,11 +30,11 @@ module.exports = function(api) {
             '@contexts': './src/contexts',
             '@utils': './src/utils',
             '@navigation': './src/navigation',
-            '@theme': './src/theme'
-          }
-        }
+            '@theme': './src/theme',
+          },
+        },
       ],
-      "react-native-reanimated/plugin",
+      'react-native-reanimated/plugin',
     ],
-  };
-};
+  }
+}
