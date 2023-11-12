@@ -1,7 +1,6 @@
 import { ParamListBase, useNavigation } from '@react-navigation/native'
 import { StackNavigationProp } from '@react-navigation/stack'
 import {
-  Button,
   Keyboard,
   KeyboardAvoidingView,
   Platform,
@@ -25,44 +24,12 @@ export function Login() {
     navigation.navigate('Home')
   }
 
-  const handleFacebook = () => {
-    handleSignIn() // TODO: Implementar login social
-  }
-
-  const handleGoogle = () => {
-    handleSignIn() // TODO: Implementar login social
-  }
-
   const handleRegister = () => {
     navigation.navigate('create-account')
   }
 
   const handleForgotPassword = () => {
     navigation.navigate('forgot-password')
-  }
-
-  const onKeyPress = (data: any) => {
-    if (data.nativeEvent.key === 'Backspace') {
-      setPassword(password.slice(0, -1))
-      return
-    }
-
-    if (data.nativeEvent.key === 'Enter') {
-      // On Enter handle here
-      return
-    }
-
-    if (data.nativeEvent.key === ' ') {
-      setPassword(password + ' ')
-      return
-    }
-
-    if (data.nativeEvent.key === 'Tab') {
-      // On Tab handle here
-      return
-    }
-
-    setPassword(password + data.nativeEvent.key)
   }
 
   return (
@@ -84,7 +51,10 @@ export function Login() {
                   <TextInput
                     className="h-14 rounded-md bg-gray-200 pl-4 placeholder:text-base placeholder:text-gray-600"
                     placeholder="Email"
+                    keyboardType="email-address"
                     cursorColor="#4CB944"
+                    value={email}
+                    onChangeText={setEmail}
                   />
                 </View>
 
@@ -95,17 +65,13 @@ export function Login() {
                     secureTextEntry
                     autoCorrect={false}
                     cursorColor="#4CB944"
-                    value={'*'.repeat(password.length)} // This is important.
-                    onKeyPress={onKeyPress}
+                    value={password}
+                    onChangeText={setPassword}
                   />
                 </View>
-                <Text>{password}</Text>
               </View>
               <View className="flex-row justify-end">
-                <TouchableOpacity
-                  onPress={handleForgotPassword}
-                  className=" text-right"
-                >
+                <TouchableOpacity onPress={handleForgotPassword}>
                   <Text className="my-3 mb-8 text-gray-400">
                     Esqueci minha senha
                   </Text>
@@ -120,7 +86,6 @@ export function Login() {
                   Entrar
                 </Text>
               </TouchableOpacity>
-              {/* <Button title="Entrar" onPress={handleSignIn} /> */}
             </View>
           </TouchableWithoutFeedback>
         </KeyboardAvoidingView>
@@ -130,18 +95,15 @@ export function Login() {
         <View>
           <Text className="font-semi bold  text-center"> Ou entre com </Text>
           <View className="my-3 flex-row justify-between">
-            {/* <Button title="Facebook" onPress={handleFacebook} />
-            <Button title="Google" onPress={handleGoogle} /> */}
-
             <TouchableOpacity
-              onPress={handleFacebook}
+              onPress={handleSignIn}
               className="h-16 w-16 items-center justify-center rounded-lg bg-gray-200"
             >
               <Feather name="shopping-cart" size={18} color="#737380" />
             </TouchableOpacity>
 
             <TouchableOpacity
-              onPress={handleGoogle}
+              onPress={handleSignIn}
               className="h-16 w-16 items-center justify-center rounded-lg bg-gray-200"
             >
               <Feather name="shopping-cart" size={18} color="#737380" />
