@@ -14,7 +14,7 @@ interface ProductCardProps {
     id: string
     name: string
     brand: string
-    value: number
+    price: number
     previewURL: string
   }
   onAddProductToCart: (productId: string) => void
@@ -26,7 +26,7 @@ export function ProductCard({
   onAddProductToCart,
   onPress,
 }: ProductCardProps) {
-  const formattedValue = data.value.toLocaleString('pt-BR')
+  const formattedValue = data.price.toLocaleString('pt-BR')
 
   function handleAddProductToCart() {
     onAddProductToCart(data.id)
@@ -43,10 +43,7 @@ export function ProductCard({
       onPress={() => onPress(data.id)}
     >
       <View className="max-h-40 w-full">
-        <Image
-          source={{ uri: 'https://github.com/gabrielvbauer.png' }}
-          className="h-full w-full"
-        />
+        <Image source={{ uri: data.previewURL }} className="h-full w-full" />
       </View>
 
       <View className="space-y-2 p-3">

@@ -5,7 +5,7 @@ type OffersDataResponse = {
   id: string
   name: string
   brand: string
-  value: number
+  price: number
   previewURL: string
 }
 

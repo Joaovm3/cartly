@@ -31,21 +31,21 @@
       "name": "Mercado Leopoldo",
       "distance": 300,
       "distanceFormatted": "300m",
-      "previewURL": "https://github.com/gabrielvbauer.png"
+      "previewURL": "https://i.ibb.co/ws9BTZN/mercado-1.webp"
     },
     {
       "id": 2,
       "name": "Mercado Família",
       "distance": 1400,
       "distanceFormatted": "1.4km",
-      "previewURL": "https://github.com/gabrielvbauer.png"
+      "previewURL": "https://i.ibb.co/LR85yGn/mercado-2.jpg"
     },
     {
       "id": 3,
       "name": "Copral",
       "distance": 2480,
       "distanceFormatted": "2.48km",
-      "previewURL": "https://github.com/gabrielvbauer.png"
+      "previewURL": "https://i.ibb.co/Fw0L1LJ/mercado-3.webp"
     }
   ],
   "offers": [
@@ -53,57 +53,49 @@
       "id": 1,
       "name": "Arroz Integral 1kg",
       "brand": "Tio João",
-      "value": 5.99,
-      "previewURL": "https://example.com/arroz.jpg"
+      "price": 5.99,
+      "category": "Não periciveis",
+      "previewURL": "https://i.ibb.co/T00Zrqd/arroz.jpg"
     },
     {
       "id": 2,
       "name": "Óleo de Canola 1L",
       "brand": "Liza",
-      "value": 9.49,
-      "previewURL": "https://example.com/oleo.jpg"
+      "price": 9.49,
+      "category": "Óleos",
+      "previewURL": "https://i.ibb.co/rmWVn2F/oleo.jpg"
     },
     {
       "id": 3,
       "name": "Leite Desnatado 1L",
       "brand": "Nestlé",
-      "value": 3.99,
-      "previewURL": "https://example.com/leite.jpg"
+      "price": 3.99,
+      "category": "Lacticinios",
+      "previewURL": "https://i.ibb.co/SPpYvcG/leite.jpg"
     },
     {
       "id": 4,
       "name": "Café Torrado e Moído 250g",
       "brand": "Melitta",
-      "value": 8.29,
-      "previewURL": "https://example.com/cafe.jpg"
+      "price": 8.29,
+      "category": "Não periciveis",
+      "previewURL": "https://i.ibb.co/XWqYcry/cafe.jpg"
     },
     {
       "id": 5,
       "name": "Manteiga 200g",
       "brand": "Aviação",
-      "value": 6.79,
-      "previewURL": "https://example.com/manteiga.jpg"
+      "price": 6.79,
+      "category": "Lacticinios",
+      "previewURL": "https://i.ibb.co/f9KHwSj/manteiga.jpg"
     },
     {
       "id": 6,
       "name": "Maçãs (1kg)",
       "brand": "Fazenda Frutas Frescas",
-      "value": 4.49,
-      "previewURL": "https://example.com/macas.jpg"
-    },
-    {
-      "id": 7,
-      "name": "Pão de Forma Integral",
-      "brand": "Wickbold",
-      "value": 5.29,
-      "previewURL": "https://example.com/pao.jpg"
-    },
-    {
-      "id": 8,
-      "name": "Salmão Fresco (200g)",
-      "brand": "Mar Fresco",
-      "value": 12.99,
-      "previewURL": "https://example.com/salmao.jpg"
+      "price": 4.49,
+      "category": "Frutas",
+      "previewURL": "https://i.ibb.co/WPtcN7H/maca.jpg"
     }
   ],
   "promos": [
@@ -124,12 +116,12 @@
     },
     {
       "id": 2,
-      "description": "Frutas e verduras",
+      "description": "Frutas",
       "icon": "droplet"
     },
     {
       "id": 3,
-      "description": "Carnes",
+      "description": "Óleos",
       "icon": "droplet"
     },
     {
@@ -144,7 +136,37 @@
     },
     {
       "id": 6,
-      "description": "Lacticínios",
+      "description": "Não perecíveis",
+      "icon": "droplet"
+    },
+    {
+      "id": 7,
+      "description": "Legumes",
+      "icon": "droplet"
+    },
+    {
+      "id": 8,
+      "description": "Pães",
+      "icon": "droplet"
+    },
+    {
+      "id": 9,
+      "description": "Peixes",
+      "icon": "droplet"
+    },
+    {
+      "id": 10,
+      "description": "Cereais",
+      "icon": "droplet"
+    },
+    {
+      "id": 11,
+      "description": "Massas",
+      "icon": "droplet"
+    },
+    {
+      "id": 12,
+      "description": "Salgados",
       "icon": "droplet"
     }
   ],
@@ -154,16 +176,16 @@
       "name": "Arroz Integral 1kg",
       "brand": "Tio João",
       "price": 5.99,
-      "category": "Lacticinios",
-      "previewURL": "https://example.com/arroz.jpg"
+      "category": "Não periciveis",
+      "previewURL": "https://i.ibb.co/T00Zrqd/arroz.jpg"
     },
     {
       "id": 2,
       "name": "Óleo de Canola 1L",
       "brand": "Liza",
       "price": 9.49,
-      "category": "Lacticinios",
-      "previewURL": "https://example.com/oleo.jpg"
+      "category": "Óleos",
+      "previewURL": "https://i.ibb.co/rmWVn2F/oleo.jpg"
     },
     {
       "id": 3,
@@ -171,15 +193,15 @@
       "brand": "Nestlé",
       "price": 3.99,
       "category": "Lacticinios",
-      "previewURL": "https://example.com/leite.jpg"
+      "previewURL": "https://i.ibb.co/SPpYvcG/leite.jpg"
     },
     {
       "id": 4,
       "name": "Café Torrado e Moído 250g",
       "brand": "Melitta",
       "price": 8.29,
-      "category": "Lacticinios",
-      "previewURL": "https://example.com/cafe.jpg"
+      "category": "Não periciveis",
+      "previewURL": "https://i.ibb.co/XWqYcry/cafe.jpg"
     },
     {
       "id": 5,
@@ -187,31 +209,127 @@
       "brand": "Aviação",
       "price": 6.79,
       "category": "Lacticinios",
-      "previewURL": "https://example.com/manteiga.jpg"
+      "previewURL": "https://i.ibb.co/f9KHwSj/manteiga.jpg"
     },
     {
       "id": 6,
       "name": "Maçãs (1kg)",
       "brand": "Fazenda Frutas Frescas",
       "price": 4.49,
-      "category": "Lacticinios",
-      "previewURL": "https://example.com/macas.jpg"
+      "category": "Frutas",
+      "previewURL": "https://i.ibb.co/WPtcN7H/maca.jpg"
     },
     {
       "id": 7,
       "name": "Pão de Forma Integral",
       "brand": "Wickbold",
       "price": 5.29,
-      "category": "Lacticinios",
-      "previewURL": "https://example.com/pao.jpg"
+      "category": "Pães",
+      "previewURL": "https://i.ibb.co/30h9FHR/pao.jpg"
     },
     {
       "id": 8,
       "name": "Salmão Fresco (200g)",
       "brand": "Mar Fresco",
       "price": 12.99,
+      "category": "Peixes",
+      "previewURL": "https://i.ibb.co/D5cBx4m/salmao.jpg"
+    },
+    {
+      "id": 9,
+      "name": "Alface",
+      "brand": "Horta São João",
+      "price": 7.99,
+      "category": "Legumes",
+      "previewURL": "https://i.ibb.co/jGV7Ntp/alface.jpg"
+    },
+    {
+      "id": 10,
+      "name": "Batata",
+      "brand": "Horta São João",
+      "price": 7.99,
+      "category": "Legumes",
+      "previewURL": "https://i.ibb.co/d5H4VzC/batata.jpg"
+    },
+    {
+      "id": 11,
+      "name": "Cereal",
+      "brand": "Nestlé",
+      "price": 17.99,
+      "category": "Cereais",
+      "previewURL": "https://i.ibb.co/MCWpVZn/cereal.jpg"
+    },
+    {
+      "id": 12,
+      "name": "Cerveja (1L)",
+      "brand": "Skop",
+      "price": 5.99,
+      "category": "Bebidas",
+      "previewURL": "https://i.ibb.co/3f0K2tB/cerveja.jpg"
+    },
+    {
+      "id": 13,
+      "name": "Energético High Perf.",
+      "brand": "High Perf",
+      "price": 15.99,
+      "category": "Bebidas",
+      "previewURL": "https://i.ibb.co/5R5Kpvx/energetico.jpg"
+    },
+    {
+      "id": 14,
+      "name": "Lasanha em pote",
+      "brand": "Sadia",
+      "price": 12.99,
+      "category": "Frios",
+      "previewURL": "https://i.ibb.co/BzrRVbq/lasanha.jpg"
+    },
+    {
+      "id": 15,
+      "name": "Massa Parafuso",
+      "brand": "Massitas",
+      "price": 6.99,
+      "category": "Massas",
+      "previewURL": "https://i.ibb.co/pdPw6JT/massa.jpg"
+    },
+    {
+      "id": 16,
+      "name": "Milho verde",
+      "brand": "Horta São João",
+      "price": 9.99,
+      "category": "Legumes",
+      "previewURL": "https://i.ibb.co/zF2831z/milho.jpg"
+    },
+    {
+      "id": 17,
+      "name": "Pipoca Premium",
+      "brand": "Pipoquitos",
+      "price": 5.99,
+      "category": "Não periciveis",
+      "previewURL": "https://i.ibb.co/YbbqsCw/pipoca.jpg"
+    },
+    {
+      "id": 18,
+      "name": "Queijo ralado",
+      "brand": "São Rinco",
+      "price": 5.99,
       "category": "Lacticinios",
-      "previewURL": "https://example.com/salmao.jpg"
+      "previewURL": "https://i.ibb.co/SwJ1W2D/queijo.jpg"
+    },
+    {
+      "id": 19,
+      "name": "Refrigerante 1L",
+      "brand": "Coca-Coca",
+      "price": 7.99,
+      "category": "Bebidas",
+      "previewURL": "https://i.ibb.co/FD4g5xz/refrigerante.jpg"
+    },
+    {
+      "id": 20,
+      "name": "Salgadinho",
+      "brand": "OkZitos",
+      "price": 7.99,
+      "category": "Salgados",
+      "previewURL": "https://i.ibb.co/7SyxmR2/salgadinho.jpg"
     }
   ]
 }

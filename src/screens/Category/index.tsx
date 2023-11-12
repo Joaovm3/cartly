@@ -10,77 +10,24 @@ import { PageTitle } from '@components/PageTitle'
 import { ProductCard } from '@components/ProductCard'
 import { useCart } from '@hooks/useCart'
 import { useNavigation } from '@react-navigation/native'
+import { useFetchProductsByCategory } from '@hooks/useFetchProductsByCategory'
+import { Loading } from '@components/Loading'
 
 export interface CategoryRouteParams {
-  categoryId: number
+  categoryName: string
 }
-
-const products = [
-  {
-    id: '1',
-    name: 'Arroz Integral 1kg',
-    brand: 'Tio João',
-    value: 5.99,
-    previewURL: 'https://example.com/arroz.jpg',
-  },
-  {
-    id: '2',
-    name: 'Óleo de Canola 1L',
-    brand: 'Liza',
-    value: 9.49,
-    previewURL: 'https://example.com/oleo.jpg',
-  },
-  {
-    id: '3',
-    name: 'Leite Desnatado 1L',
-    brand: 'Nestlé',
-    value: 3.99,
-    previewURL: 'https://example.com/leite.jpg',
-  },
-  {
-    id: '4',
-    name: 'Café Torrado e Moído 250g',
-    brand: 'Melitta',
-    value: 8.29,
-    previewURL: 'https://example.com/cafe.jpg',
-  },
-  {
-    id: '5',
-    name: 'Manteiga 200g',
-    brand: 'Aviação',
-    value: 6.79,
-    previewURL: 'https://example.com/manteiga.jpg',
-  },
-  {
-    id: '6',
-    name: 'Maçãs (1kg)',
-    brand: 'Fazenda Frutas Frescas',
-    value: 4.49,
-    previewURL: 'https://example.com/macas.jpg',
-  },
-  {
-    id: '7',
-    name: 'Pão de Forma Integral',
-    brand: 'Wickbold',
-    value: 5.29,
-    previewURL: 'https://example.com/pao.jpg',
-  },
-  {
-    id: '8',
-    name: 'Salmão Fresco (200g)',
-    brand: 'Mar Fresco',
-    value: 12.99,
-    previewURL: 'https://example.com/salmao.jpg',
-  },
-]
 
 interface Props extends StackScreenProps<CategoriesRoutes, 'category'> {}
 
 export function Category({ route }: Props) {
-  const navigation = useNavigation<CategoriesStackNavigatorProps>()
-  const { addProductToCart } = useCart()
-
   const { params } = route
+
+  const navigation = useNavigation<CategoriesStackNavigatorProps>()
+  const { isLoadingProducts, products } = useFetchProductsByCategory(
+    params.categoryName,
+  )
+
+  const { addProductToCart } = useCart()
 
   function handleAddProductToCart(productId: string) {
     addProductToCart(productId)
@@ -98,36 +45,42 @@ export function Category({ route }: Props) {
       >
         <PageHeader rightButtonIcon="more-vertical" />
 
-        <PageTitle title="Lacticínios" />
+        <PageTitle title={params.categoryName} />
 
-        <FlatList
-          data={products}
-          keyExtractor={(item) => item.id.toString()}
-          renderItem={({ item }) => (
-            <ProductCard
-              data={{
-                id: item.id,
-                name: item.name,
-                brand: item.brand,
-                value: item.value,
-                previewURL: item.previewURL,
-              }}
-              onPress={handleOpenProduct}
-              onAddProductToCart={handleAddProductToCart}
-            />
-          )}
-          contentContainerStyle={{
-            marginTop: 16,
-            marginBottom: 64,
-          }}
-          numColumns={2}
-          columnWrapperStyle={{
-            gap: 24,
-          }}
-          ItemSeparatorComponent={() => <View className="my-3" />}
-          showsHorizontalScrollIndicator={false}
-          scrollEnabled={false}
-        />
+        {isLoadingProducts ? (
+          <View className="flex-1 items-center justify-center">
+            <Loading />
+          </View>
+        ) : (
+          <FlatList
+            data={products}
+            keyExtractor={(item) => item.id.toString()}
+            renderItem={({ item }) => (
+              <ProductCard
+                data={{
+                  id: item.id.toString(),
+                  name: item.name,
+                  brand: item.brand,
+                  price: item.price,
+                  previewURL: item.previewURL,
+                }}
+                onPress={handleOpenProduct}
+                onAddProductToCart={handleAddProductToCart}
+              />
+            )}
+            contentContainerStyle={{
+              marginTop: 16,
+              marginBottom: 64,
+            }}
+            numColumns={2}
+            columnWrapperStyle={{
+              gap: 24,
+            }}
+            ItemSeparatorComponent={() => <View className="my-3" />}
+            showsHorizontalScrollIndicator={false}
+            scrollEnabled={false}
+          />
+        )}
       </ScrollView>
     </SafeAreaView>
   )

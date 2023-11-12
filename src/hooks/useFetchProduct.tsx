@@ -1,7 +1,7 @@
 import { useQuery } from '@tanstack/react-query'
 import { api } from '@lib/api'
 
-type ProductResponse = {
+export type ProductResponse = {
   id: number
   name: string
   brand: string
@@ -11,14 +11,17 @@ type ProductResponse = {
 }
 
 export function useFetchProduct(productId: string) {
-  const { data, isLoading } = useQuery<ProductResponse>({
-    queryKey: ['product'],
+  const { data, isLoading, remove } = useQuery<ProductResponse[]>({
+    queryKey: ['product', productId],
     queryFn: () => fetchProductById(productId),
   })
 
+  const responseData: ProductResponse[] = data!
+
   return {
     isLoadingProduct: isLoading,
-    product: data,
+    product: responseData,
+    remove,
   }
 }
 

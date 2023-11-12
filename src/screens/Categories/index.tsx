@@ -12,9 +12,9 @@ export function Categories() {
 
   const navigation = useNavigation<CategoriesStackNavigatorProps>()
 
-  function handleGoToCategory(id: number) {
+  function handleGoToCategory(category: string) {
     navigation.navigate('category', {
-      categoryId: id,
+      categoryName: category,
     })
   }
 
@@ -38,7 +38,7 @@ export function Categories() {
                   categoryId={item.id}
                   title={item.description}
                   icon={item.icon}
-                  onCategoryPress={handleGoToCategory}
+                  onCategoryPress={() => handleGoToCategory(item.description)}
                 />
               )}
               numColumns={2}
