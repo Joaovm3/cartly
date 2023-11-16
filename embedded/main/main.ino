@@ -1,9 +1,22 @@
+#include <format>
+
 #include <WiFi.h>
 #include <FirebaseESP32.h>
 
-// Replace with your network credentials
-const char* ssid = "Visitante";
-const char* password = "";
+void connectToNetwork(const char *ssid, const char *pass) {
+  Serial.println(std::format("Attempting to connect to {}...", ssid));
+
+  WiFi.begin(ssid, pass);
+
+  while (WiFi.status() != WL_CONNECTED) {
+    delay(500);
+    Serial.print(".");
+  }
+
+  Serial.println();
+  Serial.println(std::format("Successfully connected to {}!", ssid));
+  Serial.println(std::format("IP address: {}", WiFi.localIP()))
+}
 
 // Firebase project credentials - Esta deve ser a chave privada do arquivo JSON de serviço que você possui.
 // Este é apenas um exemplo. Você precisa passar o JSON como uma string aqui.
@@ -23,22 +36,7 @@ void setup() {
     delay(100);
   }
 
-  Serial.println();
-  Serial.println("******************************************************");
-  Serial.print("Connecting to ");
-  Serial.println(ssid);
-
-  WiFi.begin(ssid, password);
-
-  while (WiFi.status() != WL_CONNECTED) {
-    delay(500);
-    Serial.print(".");
-  }
-
-  Serial.println("");
-  Serial.println("WiFi connected");
-  Serial.println("IP address: ");
-  Serial.println(WiFi.localIP());
+  connectToNetwork("Visitante", "");
 
   // A função Firebase.begin() abaixo precisa ser modificada para utilizar a chave de serviço JSON.
   // A biblioteca que você está usando pode não suportar diretamente a autenticação Firestore; portanto, isso pode não funcionar.
