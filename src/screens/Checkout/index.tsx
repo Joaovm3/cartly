@@ -1,3 +1,4 @@
+import { useState } from 'react'
 import {
   ScrollView,
   Text,
@@ -12,15 +13,64 @@ import { CartProductList } from '@components/CartProductList'
 import { Separator } from '@components/Separator'
 import { AppStackNavigatorProps } from '@routes/app.stack.routes'
 import { PageTitle } from '@components/PageTitle'
+import { OrderStatus } from '@utils/order-status.enum'
+import { Timestamp, addDoc, collection } from 'firebase/firestore'
+import { db } from '@db/firebaseConfig'
+import { ProductResponse } from '@hooks/useFetchProduct'
+
+export interface CheckoutData {
+  id?: string
+  orderId: number
+  status: OrderStatus
+  read: boolean
+  createdAt: Timestamp
+  updatedAt: Timestamp | null
+  products: ProductResponse[]
+}
 
 export function Checkout() {
+  const mock: CheckoutData = {
+    orderId: 123,
+    status: OrderStatus.PENDING,
+    createdAt: Timestamp.fromDate(new Date()),
+    updatedAt: null,
+    read: false,
+    products: [
+      {
+        id: 1,
+        name: 'Arroz Integral 1kg',
+        brand: 'Tio João',
+        price: 5.99,
+        category: 'Não periciveis',
+        previewURL: 'https://i.ibb.co/T00Zrqd/arroz.jpg',
+      },
+      {
+        id: 2,
+        name: 'Óleo de Canola 1L',
+        brand: 'Liza',
+        price: 9.49,
+        category: 'Óleos',
+        previewURL: 'https://i.ibb.co/rmWVn2F/oleo.jpg',
+      },
+    ],
+  }
+
+  const [data, setData] = useState<CheckoutData>(mock)
+
   const navigation = useNavigation<AppStackNavigatorProps>()
+
+  const ordersRef = collection(db, 'orders')
+
+  async function saveOrder(data: CheckoutData) {
+    const result = await addDoc(ordersRef, data)
+  }
 
   function handleGoBack() {
     navigation.goBack()
   }
 
-  function handleFinishBuying() {
+  async function handleFinishBuying() {
+    await saveOrder(data)
     navigation.navigate('payment_confirmation')
   }
 

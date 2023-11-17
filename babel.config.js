@@ -31,6 +31,7 @@ module.exports = function (api) {
             '@utils': './src/utils',
             '@navigation': './src/navigation',
             '@theme': './src/theme',
+            '@db': './src/db',
           },
         },
       ],

@@ -1,0 +1,13 @@
+{
+  "type": "service_account",
+  "project_id": "cartly-app",
+  "private_key_id": "b15923ad4a0e4f48dc00b309557f1b9af5e37fa8",
+  "private_key": "-----BEGIN PRIVATE KEY-----\nMIIEvgIBADANBgkqhkiG9w0BAQEFAASCBKgwggSkAgEAAoIBAQCqBnr4enMqNXGx\n+ND7HXk3Wp19o41MZc/BKvXdQHDKQr/DL/b8ifzvD6ew/sA9FIOome2stdRQKrMX\nSP8R004xNEUEonUnNhnqzoekXF9FhYW44fcgFj/oQpJ2AVHGOpgRYvs5SsS+8uiu\n2ejBQKw1ac7NcF55NAhVriyzvPb7qfflI4GZpqj0UWUCrAcZXumqwaaEY0thy2Zw\nktPXUybzNL6Q51wKUGm9lEMRq4BB5p6yJ5BDGL+hGPikct3+XkfXKhGuLrwPybFJ\nAClm6x+WJwRfArBNWcZ6IXzccfLFgJV8Ke3E3XqJMoQJjkuk/2Yc2jk0lsxNQOxl\nk+pJiCO3AgMBAAECggEAEo4CfXtfdgu/DJ0KsVzWDaRl64Adu2ig84OssSiHJouC\nQdrKKWUlpTEgK8ChWgkTFSM3PNHbCaSfRrtAmsFklxoNLiRMhKryyR0g0F8ERqH7\npeGDBo1nDAG32gjq06cxUTRsFiSCtBPuMKa3L9/O60VQvDq3FKMJBdCsMDE/Ater\n8TElH9Z6WJxRgS5+DNiTGn6Solp4W8FZEF+5RmZ1fc5u9dkP+5GlBpS69v91a/ao\nmvkndyzP2XFLr+1B/TG9EasEDtXcomvr4hgplLEcwYDyVIt+BwKc40BPjLm6maBF\nnCCR14xf4rZTM8NHyD3uA81+1R4iSozkPnwxSlGDAQKBgQDjcxeyfUtmabrBL9vE\nlJC/3NRuIlSnVqMxYoLh+qlrd4RGGXRwjxpST5x1dp6mcaAgpiA7y23IQkd18eAs\njv27L1KMYgWdb9285/UHb78RnUyd6QziB+3CMtbMdHvgGa9Rom4IxAJr0XRSLN8r\na+T7MFtSuBbNhTO5kcF8iWsnDwKBgQC/XhsLyFNzQQscLnJdB7fUXHh9pb2BdVVH\nUeZdT8lg18Ex3tJaa7ChKFI8Sn+FN4C+tFdr78h+4Mgp4lw3paagAXesdi+U4Odv\nAmbrq8PFJQim+uf3/TzqS/lDsqdZkRVxy8SOzoV1Q9V2zGqPfQ0Ffh+8lc7De1aM\nVc+Svkt42QKBgGDd2F7M27rPFplGD5umBgugOdx5xIHL9Q6IPOOPBG5fZTcRijSR\nzYz2mNSx4xlR1PdyqNGubp/WEmcZzvZLI6Z/nfFpoaiORuo4A3PaVI5k5oduBG2T\nIOAPFMnYZhVn+vGScrhK+hj/CEIjGBx/A/MyggI1ooh+zSuf9r5aLAdjAoGBAI57\nJ5H3PkLSy83YuyeO5o0DqGaMr3MjBDKMxQL2s84Z9esGpwHRqnnjBo+DPDzYnU/g\nADMKHfJxtDaTJev8tvns/ch3Wmfzp/zcAfs4MROoxi9lIq9eaitcE6QW8Ujbn+bR\nO3DETVOJBPdlrXVWOwq65DBKLd8YBtGH1nvAmXrJAoGBAMsAwG2VenUl3U5Z+Ysu\nWd4zjlBrx5r2WfihT6pDJzfv+uNdXPPai8YSOOK/FsOG8eQUORLbU34UQzDwdLk1\n2SIdkW/GsRthDPoTo5dKuJNhPeYIyiiejurgke+n22yOTsf6zv1RTy1DdSXgKG2c\nPsQaozegG0g6+Co+hp/kqIUm\n-----END PRIVATE KEY-----\n",
+  "client_email": "firebase-adminsdk-wdlfd@cartly-app.iam.gserviceaccount.com",
+  "client_id": "109305668149273128521",
+  "auth_uri": "https://accounts.google.com/o/oauth2/auth",
+  "token_uri": "https://oauth2.googleapis.com/token",
+  "auth_provider_x509_cert_url": "https://www.googleapis.com/oauth2/v1/certs",
+  "client_x509_cert_url": "https://www.googleapis.com/robot/v1/metadata/x509/firebase-adminsdk-wdlfd%40cartly-app.iam.gserviceaccount.com",
+  "universe_domain": "googleapis.com"
+}

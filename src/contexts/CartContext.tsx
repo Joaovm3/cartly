@@ -11,15 +11,17 @@ type ProductAPIResponse = {
   category: string
 }
 
+export interface Product {
+  id: string
+  name: string
+  brand: string
+  category: string
+  price: number
+}
+
 export type CartProduct = {
   id: string
-  product: {
-    id: string
-    name: string
-    brand: string
-    category: string
-    price: number
-  }
+  product: Product
   amount: number
   productTotalPrice: number
 }
