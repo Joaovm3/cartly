@@ -4,9 +4,9 @@
 #include "Timestamp.hpp"
 #include "BlueJSON.h"
 
-#include <string>
 #include <vector>
 #include <queue>
+#include <Arduino.h>
 
 #define CARTLY_ORDER_STATUS_PENDING "PENDING"
 #define CARTLY_ORDER_STATUS_PROCESSED "PROCESSED"
@@ -15,7 +15,8 @@
 
 namespace Cartly {
   struct Product {
-    std::string name, brand, category, previewUrl;
+    String name, brand, category, previewUrl;
+    int amount;
     float price;
 
     static Product fromJson(bj_object *object);
@@ -31,20 +32,23 @@ namespace Cartly {
   */
 
   struct Order {
-    std::string id, status;
+    String id, status;
     std::vector<Product> products;
     Timestamp createTime;
 
     static Order fromJson(bj_object *object);
   };
 
-  // Perform a HTTP GET to fetch all orders, and filter only those which have
-  // the status as "PENDING". The orders are enqueued in crescent order based
-  // on the order creation time
+  // Faz um HTTP GET pra dar fetch em todos os pedidos, e filtra apenas os que
+  // tiverem o status como "PENDING". Os pedidos são enfileirados em ordem
+  // crescente baseado no tempo de criação
+  // TODO: Talvez seja possivel filtrar direto na requisição para o firebase
+  //       retornar só os pedidos pendentes
   std::queue<Order> fetchAllPendingOrders();
 
-  // Perform a HTTP PATCH to change the order status, automatically changing
-  // the updatedAt timestamp
+  // Faz um HTTP PATCH para mudar o status do pedido. Também altera a timestamp
+  // updatedAt para uma timestamp do momento em que a função foi chamada, e muda 
+  // o valor do campo read para false para fins de notificação
   void updateOrderStatus(const char *id, const char *status);
 }
 

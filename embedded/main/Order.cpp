@@ -1,57 +1,54 @@
 #include "Order.hpp"
 
+#include "Request.hpp"
+
 #define BJ_IMPLEMENTATION
 #include "BlueJSON.h"
 
 #include <algorithm>
 #include <cstring>
-#include <HTTPClient.h>
 
-#define CARTLY_ORDERS_URL "https://firestore.googleapis.com/v1/projects/cartly-app/databases/(default)/documents/orders/"
+#define CARTLY_FIRESTORE_HOST "firestore.googleapis.com"
+#define CARTLY_ORDERS_URL "https://firestore.googleapis.com/v1/projects/cartly-app/databases/(default)/documents/orders"
 
 namespace Cartly {
-  std::string fetchPayload(const char *url) {
-    std::string payload;
-    HTTPClient http;
-
-    http.begin(url);
-    
-    int response = http.GET();
-    if (response > 0) {
-      payload = http.getString();
-    } else {
-      Serial.println("Error on HTTP request!");
-    }
-
-    http.end();
-
-    return payload;
-  }
-
-  // TODO: Maybe store the full name of the order, and then add a .id() 
-  //       method to extract just the id from the name
-  std::string parseOrderId(const char *name) {
-    return std::string(std::strrchr(name, '/') + 1);
+  String parseOrderId(const char *name) {
+    return String(std::strrchr(name, '/') + 1);
   }
 
   Product Product::fromJson(bj_object *object) {
     Product product;
 
-    bj_object *mapValue = bj_object_find(object, "mapValue")->object;
+    bj_object *outerMapValue = bj_object_find(object, "mapValue")->object;
+    bj_object *outerFields = bj_object_find(outerMapValue, "fields")->object;
+
+    // > Quantidade
+    // Por algum motivo o Firebase guarda inteiros como strings no JSON...
+    bj_object *amount = bj_object_find(outerFields, "amount")->object;
+    bj_string *amountValue = bj_object_find(amount, "integerValue")->string;
+    std::sscanf(amountValue->text, "%d", &product.amount);
+
+    bj_object *productMap = bj_object_find(outerFields, "product")->object;
+    bj_object *mapValue = bj_object_find(productMap, "mapValue")->object;
     bj_object *fields = bj_object_find(mapValue, "fields")->object;
 
+    // > Nome
     bj_object *name = bj_object_find(fields, "name")->object;
     product.name = bj_object_find(name, "stringValue")->string->text;
 
+    // > Marca
     bj_object *brand = bj_object_find(fields, "brand")->object;
     product.brand = bj_object_find(brand, "stringValue")->string->text;
 
+    // > Categoria
     bj_object *category = bj_object_find(fields, "category")->object;
     product.category = bj_object_find(category, "stringValue")->string->text;
 
+    // > Url da iamgem de preview
     bj_object *previewUrl = bj_object_find(fields, "previewURL")->object;
     product.previewUrl = bj_object_find(previewUrl, "stringValue")->string->text;
 
+    // > Preço
     bj_object *price = bj_object_find(fields, "price")->object;
     product.price = bj_object_find(price, "doubleValue")->number->rational;
 
@@ -66,17 +63,21 @@ namespace Cartly {
   Order Order::fromJson(bj_object *object) {
     Order order;
 
+    // > ID
     bj_string *name = bj_object_find(object, "name")->string;
     order.id = parseOrderId(name->text);
 
+    // > Timestamp de criação
     bj_string *createTime = bj_object_find(object, "createTime")->string;
     order.createTime = Timestamp::fromString(createTime->text);
 
     bj_object *fields = bj_object_find(object, "fields")->object;
 
+    // > Código de status
     bj_object *status = bj_object_find(fields, "status")->object;
     order.status = bj_object_find(status, "stringValue")->string->text;
 
+    // > Lista de produtos
     bj_object *products = bj_object_find(fields, "products")->object;
     bj_object *arrayValue = bj_object_find(products, "arrayValue")->object;
     bj_array *values = bj_object_find(arrayValue, "values")->array;
@@ -85,11 +86,10 @@ namespace Cartly {
     return order;
   }
 
-  // TODO: If the ESP32 processor can't handle all this JSON parsing we could
-  //       split the orders into two or more threads...
   void ordersIteratorCallback(bj_value *value, void *arg) {
     std::vector<Order> *pendingOrders = (std::vector<Order> *)arg;
 
+    // Considera apenas os pedidos que estão pendentes
     Order order = Order::fromJson(value->object);
     if (order.status == CARTLY_ORDER_STATUS_PENDING) {
       pendingOrders->push_back(order);
@@ -100,22 +100,26 @@ namespace Cartly {
     return firstOrder.createTime < secondOrder.createTime;
   }
 
-  // TODO: Add a log to benchmark how much time it took to run this function
   std::queue<Order> fetchAllPendingOrders() {
-    std::string payload = fetchPayload(CARTLY_ORDERS_URL);
+    // Serial.println("Fetching all orders...");
+
+    String payload = fetchPayload(CARTLY_FIRESTORE_HOST, CARTLY_ORDERS_URL);
+
+    // Serial.println("Parsing pending orders...");
 
     bj_value *root = bj_read_text(payload.c_str());
     bj_array *documents = bj_object_find(root->object, "documents")->array;
 
-    // Filter pending orders
     std::vector<Order> pendingOrders;
     bj_array_for_each(documents, ordersIteratorCallback, &pendingOrders);
 
-    // Sort orders by creation time
+    // Serial.println("Sorting orders by creation time...");
+
+    // Organiza os pedidos em ordem crescente considerando o tempo de criação
     std::sort(pendingOrders.begin(), pendingOrders.end(), compareOrdersCallback);
 
-    // TODO: For now it will just be copied all over the place for simplicity. Maybe
-    //       it would be better to use some refs or pointers...
+    // Enfilera os pedidos organizados de modo que o primeiro da fila seja o pedido
+    // mais antigo e o último seja o mais recente
     std::queue<Order> sortedOrders;
     for (const Order order : pendingOrders) {
       sortedOrders.push(order);
@@ -123,35 +127,35 @@ namespace Cartly {
 
     bj_value_destroy(root);
 
+    // Serial.println("Organized all pending orders!");
+
     return sortedOrders;
   }
 
   void updateOrderStatus(const char *id, const char *status) {
-    HTTPClient http;
-    http.begin(std::string(CARTLY_ORDERS_URL) + id);
-    http.addHeader("Content-Type", "application/json");
+    // Serial.println("Updating order status...");
 
-    char payload[512];
+    char payload[256];
     const char *format = 
-    "{"
-      "\"fields\":{"
-        "\"status\":{\"stringValue\":\"%s\"},"
-        "\"updatedAt\":{\"timestampValue\":\"%s\"}"
-      "}"
-    "}";
-    Timsetamp now = Timestamp::now();
-    std::snprintf(payload, sizeof(payload), format, status, now.toString().c_str());
+      "{"
+        "\"fields\":{"
+          "\"status\":{\"stringValue\":\"%s\"},"
+          "\"updatedAt\":{\"timestampValue\":\"%s\"},"
+          "\"read\":{\"booleanValue\":false}"
+        "}"
+      "}";
+    std::snprintf(payload, sizeof(payload), format, 
+      status, Timestamp::now().toString().c_str());
 
-    int httpCode = http.sendRequest("PATCH", payload);
+    // Se não usar uma update mask o FETCH vai sobrescrever todo o JSON
+    const char *updateMask = 
+      "updateMask.fieldPaths=status&"
+      "updateMask.fieldPaths=updatedAt&"
+      "updateMask.fieldPaths=read";
+    String orderUrl = String(CARTLY_ORDERS_URL) + '/' + id + '?' + updateMask;
+    
+    patchPayload(CARTLY_FIRESTORE_HOST, orderUrl.c_str(), payload);
 
-    /*
-    if (httpCode > 0) {
-      Serial.println("Successfully updated order status!");
-    } else {
-      Serial.println("Error on HTTP request!");
-    }
-    */
-
-    http.end();
+    // Serial.println("Updated order status!");
   }
 }
