@@ -5,7 +5,7 @@
 #include <chrono>
 
 namespace Cartly {
-  // Timestamp example: "2023-11-17T03:50:08.912975Z"
+  // Exemplo de uma timestamp no formato do firebase: "2023-11-17T03:50:08.912975Z"
   // https://firebase.google.com/docs/reference/kotlin/com/google/firebase/Timestamp
   class Timestamp {
     std::chrono::time_point<std::chrono::system_clock> timePoint;
