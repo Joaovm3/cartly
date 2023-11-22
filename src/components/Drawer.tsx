@@ -1,18 +1,13 @@
 import { View, TouchableOpacity, Image, Text } from 'react-native'
 import Feather from '@expo/vector-icons/Feather'
-import { useNavigation } from '@react-navigation/core'
 import {
   DrawerContentComponentProps,
   DrawerContentScrollView,
   DrawerItemList,
 } from '@react-navigation/drawer'
-import { ParamListBase } from '@react-navigation/routers'
-import { StackNavigationProp } from '@react-navigation/stack'
 import { useAuth } from '@hooks/useAuth'
 
 export function Drawer(props: DrawerContentComponentProps) {
-  const navigation = useNavigation<StackNavigationProp<ParamListBase>>()
-
   const { logout } = useAuth()
 
   return (

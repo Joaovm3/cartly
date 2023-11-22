@@ -16,6 +16,7 @@ import {
   ACTIVE_TINT_COLOR,
   INACTIVE_TINT_COLOR,
 } from '@constants/color.constants'
+import { GroceryMode } from '@screens/GroceryMode'
 
 export type DrawerRoutes = {
   home_3: undefined
@@ -23,6 +24,7 @@ export type DrawerRoutes = {
   paymentMethods: undefined
   addresses: undefined
   settings: undefined
+  grocery_mode: undefined
 }
 
 export type AppDrawerNavigatorProps = DrawerNavigationProp<DrawerRoutes>
@@ -46,6 +48,12 @@ const routes: Route[] = [
     label: 'Pedidos',
     icon: 'clipboard',
     component: Order,
+  },
+  {
+    name: 'grocery_mode',
+    label: 'Modo Rancho',
+    icon: 'shopping-cart',
+    component: GroceryMode,
   },
   {
     name: 'paymentMethods',
