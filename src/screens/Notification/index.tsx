@@ -44,8 +44,8 @@ export function Notification() {
     })
 
     list.sort((a, b) =>
-      moment(b.updatedAt?.toDate(), 'DD-MM-YYYY').diff(
-        moment(a.updatedAt?.toDate(), 'DD-MM-YYYY'),
+      moment(b.createdAt?.toDate(), 'DD-MM-YYYY').diff(
+        moment(a.createdAt?.toDate(), 'DD-MM-YYYY'),
       ),
     )
 
@@ -58,13 +58,15 @@ export function Notification() {
   }
 
   async function readNotificationOnPress(data: CheckoutData) {
-    // if (data.read) {
-    //   return
-    // }
+    if (data.read) {
+      return
+    }
 
     const refDoc = doc(ordersRef, data.id)
     data.read = !data.read
-    data.status = OrderStatus.COMPLETED
+    // if (data.status === OrderStatus.PROCESSED) {
+    //   data.status = OrderStatus.COMPLETED
+    // }
 
     await updateDoc(refDoc, data as any)
   }
@@ -86,7 +88,7 @@ export function Notification() {
               key={index}
               onPress={() => readNotificationOnPress(notification)}
             >
-              {notification.status === OrderStatus.COMPLETED && (
+              {notification.status === OrderStatus.PROCESSED && (
                 <View
                   className={`m-2 space-y-4 rounded-md ${
                     notification.read ? 'bg-gray-100' : 'bg-gray-200'
@@ -112,6 +114,33 @@ export function Notification() {
                       <Text className="text-sm leading-4 text-gray-600">
                         Seus itens do pedido {notification.orderId} foram
                         coletados e logo serão entregues!
+                      </Text>
+                    </View>
+                  </View>
+                </View>
+              )}
+              {notification.status === OrderStatus.PENDING && (
+                <View
+                  className={`m-2 space-y-4 rounded-md ${
+                    notification.read ? 'bg-gray-100' : 'bg-gray-200'
+                  } p-4`}
+                >
+                  <View className="flex-row items-center">
+                    <View className="pr-2">
+                      <Feather name="clock" size={20} color="#4CB944" />
+                    </View>
+                    <View className="flex-1">
+                      <View className="flex-row justify-between">
+                        <Text className="text-base font-semibold leading-relaxed">
+                          Pedido em processamento!
+                        </Text>
+                        <Text>
+                          {timeString(notification.createdAt?.toDate())}
+                        </Text>
+                      </View>
+                      <Text className="text-sm leading-4 text-gray-600">
+                        Seus itens do pedido {notification.orderId} estão sendo
+                        separados e logo serão colegados!
                       </Text>
                     </View>
                   </View>

@@ -86,7 +86,7 @@ export default function App() {
 
     const refDoc = doc(ordersRef, data.id)
     data.read = true
-    data.status = OrderStatus.COMPLETED
+    // data.status = OrderStatus.COMPLETED
 
     await updateDoc(refDoc, data as any)
   }

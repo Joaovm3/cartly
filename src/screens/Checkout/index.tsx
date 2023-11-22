@@ -17,10 +17,13 @@ import { OrderStatus } from '@utils/order-status.enum'
 import { Timestamp, addDoc, collection } from 'firebase/firestore'
 import { db } from '@db/firebaseConfig'
 import { ProductResponse } from '@hooks/useFetchProduct'
+// import { useCart } from '@hooks/useCart'
+// import { CartProduct } from '@contexts/CartContext'
+import { randomUUID } from 'expo-crypto'
 
 export interface CheckoutData {
   id?: string
-  orderId: number
+  orderId: string
   status: OrderStatus
   read: boolean
   createdAt: Timestamp
@@ -29,8 +32,8 @@ export interface CheckoutData {
 }
 
 export function Checkout() {
-  const mock: CheckoutData = {
-    orderId: 123,
+  const initialData: CheckoutData = {
+    orderId: randomUUID().split('-')[0],
     status: OrderStatus.PENDING,
     createdAt: Timestamp.fromDate(new Date()),
     updatedAt: null,
@@ -55,7 +58,18 @@ export function Checkout() {
     ],
   }
 
-  const [data, setData] = useState<CheckoutData>(mock)
+  // const { products } = useCart()
+
+  // const initialData = {
+  //   orderId: randomUUID().split('-')[0],
+  //   status: OrderStatus.PENDING,
+  //   createdAt: Timestamp.fromDate(new Date()),
+  //   updatedAt: null,
+  //   read: false,
+  //   products: products || ,
+  // }
+
+  const [data, setData] = useState<CheckoutData>(initialData)
 
   const navigation = useNavigation<AppStackNavigatorProps>()
 
