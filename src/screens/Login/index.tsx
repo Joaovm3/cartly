@@ -29,7 +29,7 @@ export function Login() {
       password,
     })
 
-    if (isSignIn) {
+    if (!isSignIn) {
       Toast.show({
         text1: 'Login inválido',
         text2: 'Usuário ou senha incorretos',
