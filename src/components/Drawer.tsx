@@ -8,9 +8,12 @@ import {
 } from '@react-navigation/drawer'
 import { ParamListBase } from '@react-navigation/routers'
 import { StackNavigationProp } from '@react-navigation/stack'
+import { useAuth } from '@hooks/useAuth'
 
 export function Drawer(props: DrawerContentComponentProps) {
   const navigation = useNavigation<StackNavigationProp<ParamListBase>>()
+
+  const { logout } = useAuth()
 
   return (
     <View className="flex-1">
@@ -30,10 +33,7 @@ export function Drawer(props: DrawerContentComponentProps) {
         </View>
       </DrawerContentScrollView>
 
-      <TouchableOpacity
-        onPress={() => navigation.navigate('Login')}
-        activeOpacity={0.7}
-      >
+      <TouchableOpacity onPress={() => logout()} activeOpacity={0.7}>
         <View className="mx-2 mb-12 flex-row rounded-md bg-gray-200 px-2 py-4">
           <Feather name="log-out" size={18} color="#DB2B39" />
           <Text className="ml-2 font-semibold text-red-500">Sair</Text>

@@ -1,11 +1,12 @@
 import { CartContextProvider } from '@contexts/CartContext'
 import { AppStackRoutes } from './app.stack.routes'
 import { AuthRoutes } from './auth.routes'
-
-const isUserAuthenticated = true
+import { useAuth } from '@hooks/useAuth'
 
 export function Routes() {
-  return isUserAuthenticated ? (
+  const { user } = useAuth()
+
+  return user ? (
     <CartContextProvider>
       <AppStackRoutes />
     </CartContextProvider>

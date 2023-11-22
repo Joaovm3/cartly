@@ -12,15 +12,33 @@ import {
 import { TouchableWithoutFeedback } from 'react-native-gesture-handler'
 import Feather from '@expo/vector-icons/Feather'
 import { useState } from 'react'
+import { useAuth } from '@hooks/useAuth'
+import Toast from 'react-native-toast-message'
 
 export function Login() {
   const [password, setPassword] = useState('')
   const [email, setEmail] = useState('')
 
+  const { signIn } = useAuth()
+
   const navigation = useNavigation<StackNavigationProp<ParamListBase>>()
 
   const handleSignIn = () => {
-    console.log('logado')
+    const isSignIn = signIn({
+      email,
+      password,
+    })
+
+    if (isSignIn) {
+      Toast.show({
+        text1: 'Login inválido',
+        text2: 'Usuário ou senha incorretos',
+        type: 'error',
+      })
+
+      return
+    }
+
     navigation.navigate('Home')
   }
 

@@ -20,6 +20,7 @@ import { ordersRef } from '@db/firebaseConfig'
 import { useEffect } from 'react'
 import { OrderStatus } from '@utils/order-status.enum'
 import { CheckoutData } from '@screens/Checkout'
+import { AuthContextProvider } from '@contexts/AuthContext'
 
 const queryClient = new QueryClient()
 
@@ -98,7 +99,9 @@ export default function App() {
       <QueryClientProvider client={queryClient}>
         <GestureHandlerRootView className="flex-1">
           <NotifierWrapper>
-            <Routes />
+            <AuthContextProvider>
+              <Routes />
+            </AuthContextProvider>
           </NotifierWrapper>
         </GestureHandlerRootView>
       </QueryClientProvider>
