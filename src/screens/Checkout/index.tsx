@@ -16,10 +16,10 @@ import { PageTitle } from '@components/PageTitle'
 import { OrderStatus } from '@utils/order-status.enum'
 import { Timestamp, addDoc, collection } from 'firebase/firestore'
 import { db } from '@db/firebaseConfig'
-import { ProductResponse } from '@hooks/useFetchProduct'
-// import { useCart } from '@hooks/useCart'
+import { useCart } from '@hooks/useCart'
 // import { CartProduct } from '@contexts/CartContext'
 import { randomUUID } from 'expo-crypto'
+import { CartProduct } from '@contexts/CartContext'
 
 export interface CheckoutData {
   id?: string
@@ -28,46 +28,20 @@ export interface CheckoutData {
   read: boolean
   createdAt: Timestamp
   updatedAt: Timestamp | null
-  products: ProductResponse[]
+  products: CartProduct[]
 }
 
 export function Checkout() {
+  const { products } = useCart()
+
   const initialData: CheckoutData = {
     orderId: randomUUID().split('-')[0],
     status: OrderStatus.PENDING,
     createdAt: Timestamp.fromDate(new Date()),
     updatedAt: null,
     read: false,
-    products: [
-      {
-        id: 1,
-        name: 'Arroz Integral 1kg',
-        brand: 'Tio João',
-        price: 5.99,
-        category: 'Não periciveis',
-        previewURL: 'https://i.ibb.co/T00Zrqd/arroz.jpg',
-      },
-      {
-        id: 2,
-        name: 'Óleo de Canola 1L',
-        brand: 'Liza',
-        price: 9.49,
-        category: 'Óleos',
-        previewURL: 'https://i.ibb.co/rmWVn2F/oleo.jpg',
-      },
-    ],
+    products,
   }
-
-  // const { products } = useCart()
-
-  // const initialData = {
-  //   orderId: randomUUID().split('-')[0],
-  //   status: OrderStatus.PENDING,
-  //   createdAt: Timestamp.fromDate(new Date()),
-  //   updatedAt: null,
-  //   read: false,
-  //   products: products || ,
-  // }
 
   const [data, setData] = useState<CheckoutData>(initialData)
 

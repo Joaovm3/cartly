@@ -11,6 +11,7 @@ export interface CartItemProps {
       brand: string
       category: string
       price: number
+      previewURL: string
     }
     amount: number
   }
@@ -47,10 +48,7 @@ export function CartItem({
   return (
     <View className="flex-row space-x-4">
       <View className="h-24 w-24 overflow-hidden rounded-md">
-        <Image
-          source={{ uri: 'http://github.com/gabrielvbauer.png' }}
-          className="h-full w-full"
-        />
+        <Image source={{ uri: product.previewURL }} className="h-full w-full" />
       </View>
 
       <View className="flex-1 justify-between">

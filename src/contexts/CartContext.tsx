@@ -9,6 +9,7 @@ type ProductAPIResponse = {
   brand: string
   price: number
   category: string
+  previewURL: string
 }
 
 export interface Product {
@@ -17,6 +18,7 @@ export interface Product {
   brand: string
   category: string
   price: number
+  previewURL: string
 }
 
 export type CartProduct = {
