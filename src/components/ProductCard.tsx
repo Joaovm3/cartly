@@ -7,7 +7,9 @@ import {
   TouchableOpacity,
 } from 'react-native'
 import Feather from '@expo/vector-icons/Feather'
-import Toast from 'react-native-toast-message'
+import { useToast } from '@hooks/useToast'
+import { useNavigation } from '@react-navigation/native'
+import { AppCartStackNavigatorProps } from '@navigation/Cart/CartStack'
 
 interface ProductCardProps {
   data: {
@@ -26,14 +28,17 @@ export function ProductCard({
   onAddProductToCart,
   onPress,
 }: ProductCardProps) {
+  const navigation = useNavigation<AppCartStackNavigatorProps>()
   const formattedValue = data.price.toLocaleString('pt-BR')
+  const { showNotification } = useToast()
 
   function handleAddProductToCart() {
     onAddProductToCart(data.id)
 
-    Toast.show({
-      type: 'success',
-      text1: 'Produto adicionado ao carrinho!',
+    showNotification({
+      title: 'Produto adicionado ao carrinho!',
+      description: 'Clique aqui para ir até o carrinho',
+      onPress: () => navigation.navigate('cart'),
     })
   }
 

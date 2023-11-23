@@ -5,8 +5,7 @@ import { StatusBar } from 'expo-status-bar'
 import { NavigationContainer } from '@react-navigation/native'
 
 import { Routes } from '@routes/index'
-import Toast from 'react-native-toast-message'
-import { NotifierWrapper, Notifier } from 'react-native-notifier'
+import { NotifierWrapper } from 'react-native-notifier'
 import 'moment/locale/pt-br'
 import {
   QuerySnapshot,
@@ -21,10 +20,13 @@ import { useEffect } from 'react'
 import { OrderStatus } from '@utils/order-status.enum'
 import { CheckoutData } from '@screens/Checkout'
 import { AuthContextProvider } from '@contexts/AuthContext'
+import { useToast } from '@hooks/useToast'
 
 const queryClient = new QueryClient()
 
 export default function App() {
+  const { showNotification } = useToast()
+
   useEffect(() => {
     const completedUnreadOrders = query(
       ordersRef,
@@ -43,7 +45,7 @@ export default function App() {
     })
 
     list.forEach((l) => {
-      showNotification(l)
+      readAndShowNotification(l)
     })
   }
 
@@ -51,32 +53,11 @@ export default function App() {
     console.error(e)
   }
 
-  function showNotification(doc: CheckoutData) {
-    const TITLE_COLOR = 'white'
-    const DESCRIPTION_COLOR = TITLE_COLOR
-    const BACKGROUND_COLOR = '#4CB944'
-
-    Notifier.showNotification({
+  function readAndShowNotification(doc: CheckoutData) {
+    showNotification({
       title: 'Pedido confirmado!',
       description: `Olá, seu pedido ${doc.id} foi despachado e logo será entregue.`,
-      duration: 5000,
-      // duration: 0,
-      showAnimationDuration: 800,
-      // onHidden: () => readNotification(doc),
       onPress: () => readNotification(doc),
-      hideOnPress: false,
-      componentProps: {
-        containerStyle: {
-          marginTop: 25,
-          backgroundColor: BACKGROUND_COLOR,
-        },
-        titleStyle: {
-          color: TITLE_COLOR,
-        },
-        descriptionStyle: {
-          color: DESCRIPTION_COLOR,
-        },
-      },
     })
   }
 
@@ -105,8 +86,6 @@ export default function App() {
           </NotifierWrapper>
         </GestureHandlerRootView>
       </QueryClientProvider>
-
-      <Toast />
     </NavigationContainer>
   )
 }

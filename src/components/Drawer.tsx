@@ -8,18 +8,18 @@ import {
 import { useAuth } from '@hooks/useAuth'
 
 export function Drawer(props: DrawerContentComponentProps) {
-  const { logout } = useAuth()
+  const { logout, user } = useAuth()
 
   return (
     <View className="flex-1">
       <View className="ml-3 mt-10 flex-row items-center space-x-3">
         <Image
-          source={{ uri: 'https://github.com/joaovm3.png' }}
+          source={{ uri: user?.uri }}
           width={64}
           height={64}
           className="rounded-full"
         />
-        <Text className="font-semibold"> Olá, John </Text>
+        <Text className="font-semibold"> Olá, {user?.username} </Text>
       </View>
 
       <DrawerContentScrollView {...props}>

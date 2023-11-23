@@ -1,9 +1,13 @@
+import { useState, useEffect } from 'react'
 import { View, TextInput, FlatList, ScrollView } from 'react-native'
 import { SafeAreaView } from 'react-native-safe-area-context'
 
 import { Header } from '@components/Header'
 import { SectionHeader } from '@components/SectionHeader'
-import { DeliveryStateCard } from '@components/DeliveryStateCard'
+import {
+  DeliveryCardProps,
+  DeliveryStateCard,
+} from '@components/DeliveryStateCard'
 import { BannerCard } from '@components/BannerCard'
 import { QuickAccess } from '@components/QuickAccess'
 import { Market } from '@components/Market'
@@ -16,8 +20,67 @@ import { useFetchNearbyMarkets } from '@hooks/useFetchNearbyMarkets'
 import { useFetchOffers } from '@hooks/useFetchOffers'
 import { useFetchPromos } from '@hooks/useFetchPromos'
 import { useCart } from '@hooks/useCart'
+import {
+  FirestoreError,
+  QuerySnapshot,
+  onSnapshot,
+  orderBy,
+  query,
+  where,
+} from 'firebase/firestore'
+import { ordersRef } from '@db/firebaseConfig'
+import { OrderStatus } from '@utils/order-status.enum'
 
 export function Home() {
+  const [items, setItems] = useState<DeliveryCardProps[]>([])
+
+  useEffect(() => {
+    const q = query(
+      ordersRef,
+      where('createdAt', '!=', null),
+      orderBy('createdAt', 'asc'),
+    )
+    const unsub = onSnapshot(q, onResult, onError)
+    return () => unsub()
+  }, [])
+
+  function onResult(snapshot: QuerySnapshot) {
+    const list: DeliveryCardProps[] = []
+    const STATUS_TITLE = {
+      [OrderStatus.FAILED]: 'Falha ao coletar os itens',
+      [OrderStatus.PENDING]: 'Coletando itens',
+      [OrderStatus.PROCESSED]: 'Itens a caminho',
+      [OrderStatus.COMPLETED]: 'Itens a caminho',
+    }
+
+    const STATUS_SUBTITLE = {
+      [OrderStatus.FAILED]: 'Ops! Houve uma falha, entre em contato!',
+      [OrderStatus.PENDING]:
+        'Seus itens estão sendo coletados pelos entregadores',
+      [OrderStatus.PROCESSED]: 'Seus itens estão chegando!',
+      [OrderStatus.COMPLETED]: 'Seus itens foram entregues!',
+    }
+
+    snapshot.docs.forEach((doc) => {
+      const status: OrderStatus = doc.data().status || OrderStatus.FAILED
+
+      list.push({
+        id: doc.data().orderId,
+        estimatedDelivery: '17:48h',
+        status,
+        title: STATUS_TITLE[status],
+        subtitle: STATUS_SUBTITLE[status],
+      } as DeliveryCardProps)
+    })
+
+    setItems(list)
+  }
+
+  function onError(e: FirestoreError) {
+    console.error(e)
+    setItems([])
+  }
+
   const { mainCategories, isMainCategoriesLoading } = useFetchMainCategories()
   const { nearbyMarkets, isNearbyMarketsLoading } = useFetchNearbyMarkets()
   const { offers, isOffersLoading } = useFetchOffers()
@@ -44,14 +107,36 @@ export function Home() {
     })
   }
 
+  const LoadingView = () => {
+    return (
+      <View className="h-16 items-center justify-center">
+        <Loading />
+      </View>
+    )
+  }
+
   return (
     <SafeAreaView className="flex-1 bg-gray-100">
       <ScrollView showsVerticalScrollIndicator={false}>
         <View className="pt-4">
           <Header />
         </View>
+
         <View className="mt-8 px-6">
-          <DeliveryStateCard />
+          {!items.length ? (
+            <LoadingView />
+          ) : (
+            <FlatList
+              className="max-h-40"
+              data={items}
+              keyExtractor={(item) => item.id.toString()}
+              renderItem={({ item }) => <DeliveryStateCard {...item} />}
+              // contentContainerStyle={{ paddingHorizontal: 24 }}
+              ItemSeparatorComponent={() => <View className="ml-2 mr-2" />}
+              horizontal
+              showsHorizontalScrollIndicator={false}
+            />
+          )}
         </View>
 
         <View className="mt-8 px-6">
@@ -64,9 +149,7 @@ export function Home() {
 
         <View className="mt-8">
           {isPromosLoading ? (
-            <View className="h-16 items-center justify-center">
-              <Loading />
-            </View>
+            <LoadingView />
           ) : (
             <FlatList
               className="max-h-40"
@@ -88,9 +171,7 @@ export function Home() {
           />
 
           {isMainCategoriesLoading ? (
-            <View className="h-16 items-center justify-center">
-              <Loading />
-            </View>
+            <LoadingView />
           ) : (
             <FlatList
               data={mainCategories}
@@ -110,9 +191,7 @@ export function Home() {
           <SectionHeader title="Mercados nas proximidades" />
 
           {isNearbyMarketsLoading ? (
-            <View className="h-16 items-center justify-center">
-              <Loading />
-            </View>
+            <LoadingView />
           ) : (
             <FlatList
               data={nearbyMarkets}
@@ -130,9 +209,7 @@ export function Home() {
           <SectionHeader title="Aproveite a oferta" />
 
           {isOffersLoading ? (
-            <View className="h-16 items-center justify-center">
-              <Loading />
-            </View>
+            <LoadingView />
           ) : (
             <FlatList
               data={offers}

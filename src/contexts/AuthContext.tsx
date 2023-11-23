@@ -9,26 +9,37 @@ type SignInProps = {
   password: string
 }
 
+type UserProps = {
+  username: string
+  uri: string
+} | null
+
 type AuthContext = {
-  user: string | null
+  user: UserProps
   signIn: (payload: SignInProps) => boolean
   logout: () => void
 }
 
 const USER = {
-  email: 'gabriel.vieira@sou.unijui.edu.br',
-  username: 'Gabriel',
+  email: 'teste@gmail.com',
+  username: 'Jhon Doe',
   password: '123456',
+  uri: 'https://github.com/joaovm3.png',
 }
 
 export const AuthContext = createContext({} as AuthContext)
 
 export function AuthContextProvider({ children }: AuthContextProviderProps) {
-  const [user, setUser] = useState<string | null>(null)
+  const userData: UserProps = {
+    username: USER.username,
+    uri: USER.uri,
+  }
+
+  const [user, setUser] = useState<UserProps>(null)
 
   function signIn(payload: SignInProps) {
     if (payload.email === USER.email && payload.password === USER.password) {
-      setUser(USER.username)
+      setUser(userData)
       return true
     } else {
       return false

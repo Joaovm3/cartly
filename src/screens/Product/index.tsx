@@ -15,9 +15,10 @@ import { useCart } from '@hooks/useCart'
 import { useNavigation } from '@react-navigation/native'
 import { StackScreenProps } from '@react-navigation/stack'
 import { CategoriesRoutes } from '@navigation/Categories/CategoriesStack'
-import Toast from 'react-native-toast-message'
 import { Loading } from '@components/Loading'
 import { useFetchProduct } from '@hooks/useFetchProduct'
+import { useToast } from '@hooks/useToast'
+import { AppCartStackNavigatorProps } from '@navigation/Cart/CartStack'
 
 const data = [
   {
@@ -51,16 +52,21 @@ interface Props extends StackScreenProps<CategoriesRoutes, 'product'> {}
 
 export function Product({ route }: Props) {
   const { productId } = route.params
-  const { addProductToCart } = useCart()
-  const { goBack } = useNavigation()
   const { isLoadingProduct, product, remove } = useFetchProduct(productId)
+
+  const navigation = useNavigation<AppCartStackNavigatorProps>()
+
+  const { addProductToCart } = useCart()
+  const { showNotification } = useToast()
+  const { goBack } = useNavigation()
 
   function handleAddProductToCart() {
     addProductToCart(productId)
 
-    Toast.show({
-      type: 'success',
-      text1: 'Produto adicionado ao carrinho!',
+    showNotification({
+      title: 'Produto adicionado ao carrinho!',
+      description: 'Clique aqui para ir até o carrinho',
+      onPress: () => navigation.navigate('cart'),
     })
   }
 

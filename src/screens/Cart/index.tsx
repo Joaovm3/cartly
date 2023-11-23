@@ -16,7 +16,10 @@ export function Cart() {
   const { totalPriceFormatted, totalItems } = useContext(CartContext)
 
   const navigation = useNavigation<AppCartStackNavigatorProps>()
-  const snapPoints = useMemo(() => [80, '22%'], [])
+  const snapPoints = useMemo(
+    () => [80, totalItems > 0 ? '22%' : 90],
+    [totalItems],
+  )
 
   function handleGoBack() {
     navigation.goBack()
@@ -59,14 +62,16 @@ export function Cart() {
             </Text>
           </View>
 
-          <TouchableOpacity
-            className="h-14 w-full items-center justify-center rounded-md bg-green-500"
-            onPress={handleFinishBuying}
-          >
-            <Text className="text-base font-medium text-gray-100">
-              Finalizar compra
-            </Text>
-          </TouchableOpacity>
+          {totalItems > 0 && (
+            <TouchableOpacity
+              className="h-14 w-full items-center justify-center rounded-md bg-green-500"
+              onPress={handleFinishBuying}
+            >
+              <Text className="text-base font-medium text-gray-100">
+                Finalizar compra
+              </Text>
+            </TouchableOpacity>
+          )}
         </View>
       </BottomSheet>
     </SafeAreaView>
