@@ -30,7 +30,7 @@ export function DeliveryStateCard(props: DeliveryCardProps) {
   const icon = STATUS_ICON[props.status] || 'archive'
 
   return (
-    <View className="space-y-4 rounded-md bg-gray-200 p-4">
+    <View className="w-[350] space-y-4 rounded-md bg-gray-200 p-4">
       <View className="flex-row items-center gap-4">
         <Feather name={icon} size={28} color="#4CB944" />
         <View>
