@@ -33,7 +33,7 @@ export function DeliveryStateCard(props: DeliveryCardProps) {
     <View className="w-[350] space-y-4 rounded-md bg-gray-200 p-4">
       <View className="flex-row items-center gap-4">
         <Feather name={icon} size={28} color="#4CB944" />
-        <View>
+        <View className="flex-shrink break-words">
           <Text className="text-base font-semibold leading-relaxed text-green-500">
             {props.title} - {props.id}
           </Text>
