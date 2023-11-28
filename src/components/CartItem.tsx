@@ -68,7 +68,7 @@ export function CartItem({
           <Text className="text-xl font-medium text-gray-900">
             R$ {priceFormatted}
           </Text>
-          <View className="flex-row items-center space-x-2 rounded-md border-2 border-gray-400">
+          <View className="flex-row items-center space-x-2 rounded-md bg-gray-200">
             <TouchableOpacity
               className="h-9 w-9 items-center justify-center"
               onPress={handleDecreaseAmount}
