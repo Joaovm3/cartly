@@ -132,7 +132,7 @@ namespace Cartly {
     return sortedOrders;
   }
 
-  void updateOrderStatus(const char *id, const char *status) {
+  void patchOrderStatus(const char *id, const char *status) {
     // Serial.println("Updating order status...");
 
     char payload[256];

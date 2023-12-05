@@ -44,10 +44,10 @@ void fetchTask(void *arg) {
 // Task para o HTTP PATCH
 void patchTask(void *arg) {
   Order *order = (Order *)arg;
-  updateOrderStatus(order->id.c_str(), CARTLY_ORDER_STATUS_PROCESSED);
+  patchOrderStatus(order->id.c_str(), CARTLY_ORDER_STATUS_PROCESSED);
 
   // A remoção do pedido deve ser feita dentro da task para não correr o risco
-  // de ele ser removido antes que função updateOrderStatus seja chamada, já que
+  // de ele ser removido antes que função patchOrderStatus seja chamada, já que
   // ele não estaria mais disponível
   pendingOrders.pop();
 

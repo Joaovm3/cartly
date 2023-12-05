@@ -49,7 +49,7 @@ namespace Cartly {
   // Faz um HTTP PATCH para mudar o status do pedido. Também altera a timestamp
   // updatedAt para uma timestamp do momento em que a função foi chamada, e muda 
   // o valor do campo read para false para fins de notificação
-  void updateOrderStatus(const char *id, const char *status);
+  void patchOrderStatus(const char *id, const char *status);
 }
 
 #endif
