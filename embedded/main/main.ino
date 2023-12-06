@@ -1,5 +1,3 @@
-// TODO: Testar o funcionamento fazendo pedidos em tempo real no app web
-
 #include "Setup.hpp"
 #include "Button.hpp"
 #include "Order.hpp"
